@@ -1,6 +1,100 @@
-type ExampleEntity @entity {
+type Network @entity {
+  "chainId"
   id: ID!
-  count: BigInt!
-  previousAdmin: Bytes! # address
-  newAdmin: Bytes! # address
+}
+  
+type Transfer @entity {
+  "hash"
+  id: ID!
+  network: Network!
+  sett: Sett!
+  from: String!
+  to: String!
+  amount: BigInt!
+}
+
+type BalanceData @entity {
+  "address"
+  id: ID!
+  netDeposit: BigInt!
+  netDepositShares: BigInt!
+  grossDeposit: BigInt!
+  grossDepositShares: BigInt!
+  grossWithdraw: BigInt!
+  grossWithdrawShares: BigInt!
+}
+
+type Harvest @entity {
+  "hash"
+  id: ID!
+  network: Network!
+  sett: Sett!
+  performanceFee: BigInt!
+  strategistFee: BigInt!
+  withdrawFee: BigInt!
+  "total token claimed"
+  harvested: BigInt!
+  "total token reinvested"
+  compounded: BigInt!
+  "total token performance fee"
+  performance: BigInt!
+  "total token strategist fee"
+  strategist: BigInt!
+  pricePerFullShare: BigInt!
+  totalSupply: BigInt!
+  balance: BigInt!
+}
+
+type Strategy @entity {
+  "address"
+  id: ID!
+  network: Network
+  sett: Sett
+  active: Boolean
+  harvests: [Harvest!]
+}
+
+type Sett @entity {
+  "address"
+  id: ID!
+  network: Network
+  transfers: [Transfer!]
+  deposits: [Transfer!]
+  withdraws: [Transfer!]
+  balanceData: BalanceData
+  strategies: [Strategy!]
+  harvests: [Harvest!]
+}
+
+type SettRegistry @entity {
+  "address"
+  id: ID!
+  network: Network
+  setts: [Sett!]
+}
+
+type SettBalance @entity {
+  "userSettAddress"
+  id: ID!
+  network: Network
+  sett: Sett
+  account: Account
+  balanceData: BalanceData
+}
+
+type Account @entity {
+  "address"
+  id: ID!
+  network: Network
+  deposits: [Transfer!]
+  withdraws: [Transfer!]
+  transfers: [Transfer!]
+  balances: [SettBalance!]
+}
+
+type AccountRegistry @entity {
+  "registryId"
+  id: ID!
+  network: Network
+  accounts: [Account!]
 }
