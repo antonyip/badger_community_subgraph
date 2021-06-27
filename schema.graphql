@@ -8,7 +8,7 @@ type SgTransfer @entity {
   id: ID!
   network: SgNetwork!
   "Token Address"
-  sett: SgSett!
+  sett: SgSett
   from: String!
   to: String!
   amount: BigInt!

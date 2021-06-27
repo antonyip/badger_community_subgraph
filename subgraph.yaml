@@ -1,6 +1,9 @@
 specVersion: 0.0.2
 schema:
   file: ./schema.graphql
+#graft:
+#  base: QmYDmPk1briFEp66KZUKBm2iCDn7q3cgqvnYzLgqQxKmwX
+#  block: 12640000
 dataSources:
   # ===== Tokens =====
   - kind: ethereum/contract
@@ -452,7 +455,7 @@ dataSources:
     network: mainnet
     source:
       address: "0xbe08ef12e4a553666291e9ffc24fccfd354f2dd2"
-      abi: V1Contract
+      abi: BadgerSett
       startBlock: 12679976
     mapping:
       kind: ethereum/events
@@ -464,17 +467,13 @@ dataSources:
         - Token
         - UserSettBalance
       abis:
-        - name: V1Contract
-          file: ./abis/V1Contract.json
-        - name: Controller
-          file: ./abis/Controller.json
-        - name: Strategy
-          file: ./abis/Strategy.json
+        - name: BadgerSett
+          file: ./abis/BadgerSett.json
         - name: ERC20
           file: ./abis/ERC20.json
       eventHandlers:
         - event: Transfer(indexed address,indexed address,uint256)
-          handler: wrappedHandleShareTransfer
+          handler: wrappedHandleShareTransfer2
       file: ./src/mapping.ts
   
   - kind: ethereum/contract
@@ -482,7 +481,7 @@ dataSources:
     network: mainnet
     source:
       address: "0x53C8E199eb2Cb7c01543C137078a038937a68E40"
-      abi: V1Contract
+      abi: BadgerSett
       startBlock: 12678302
     mapping:
       kind: ethereum/events
@@ -494,17 +493,13 @@ dataSources:
         - Token
         - UserSettBalance
       abis:
-        - name: V1Contract
-          file: ./abis/V1Contract.json
-        - name: Controller
-          file: ./abis/Controller.json
-        - name: Strategy
-          file: ./abis/Strategy.json
+        - name: BadgerSett
+          file: ./abis/BadgerSett.json
         - name: ERC20
           file: ./abis/ERC20.json
       eventHandlers:
         - event: Transfer(indexed address,indexed address,uint256)
-          handler: wrappedHandleShareTransfer
+          handler: wrappedHandleShareTransfer2
       file: ./src/mapping.ts
   
   - kind: ethereum/contract
@@ -512,7 +507,7 @@ dataSources:
     network: mainnet
     source:
       address: "0x2B5455aac8d64C14786c3a29858E43b5945819C0"
-      abi: V1Contract
+      abi: BadgerSett
       startBlock: 12679976
     mapping:
       kind: ethereum/events
@@ -524,24 +519,20 @@ dataSources:
         - Token
         - UserSettBalance
       abis:
-        - name: V1Contract
-          file: ./abis/V1Contract.json
-        - name: Controller
-          file: ./abis/Controller.json
-        - name: Strategy
-          file: ./abis/Strategy.json
+        - name: BadgerSett
+          file: ./abis/BadgerSett.json
         - name: ERC20
           file: ./abis/ERC20.json
       eventHandlers:
         - event: Transfer(indexed address,indexed address,uint256)
-          handler: wrappedHandleShareTransfer
+          handler: wrappedHandleShareTransfer2
       file: ./src/mapping.ts
   - kind: ethereum/contract
     name: pBTC
     network: mainnet
     source:
       address: "0x55912d0cf83b75c492e761932abc4db4a5cb1b17"
-      abi: V1Contract
+      abi: BadgerSett
       startBlock: 12589485
     mapping:
       kind: ethereum/events
@@ -553,17 +544,13 @@ dataSources:
         - Token
         - UserSettBalance
       abis:
-        - name: V1Contract
-          file: ./abis/V1Contract.json
-        - name: Controller
-          file: ./abis/Controller.json
-        - name: Strategy
-          file: ./abis/Strategy.json
+        - name: BadgerSett
+          file: ./abis/BadgerSett.json
         - name: ERC20
           file: ./abis/ERC20.json
       eventHandlers:
         - event: Transfer(indexed address,indexed address,uint256)
-          handler: wrappedHandleShareTransfer
+          handler: wrappedHandleShareTransfer2
       file: ./src/mapping.ts
   
   - kind: ethereum/contract
@@ -571,7 +558,7 @@ dataSources:
     network: mainnet
     source:
       address: "0xf349c0faa80fc1870306ac093f75934078e28991"
-      abi: V1Contract
+      abi: BadgerSett
       startBlock: 12589485
     mapping:
       kind: ethereum/events
@@ -583,17 +570,13 @@ dataSources:
         - Token
         - UserSettBalance
       abis:
-        - name: V1Contract
-          file: ./abis/V1Contract.json
-        - name: Controller
-          file: ./abis/Controller.json
-        - name: Strategy
-          file: ./abis/Strategy.json
+        - name: BadgerSett
+          file: ./abis/BadgerSett.json
         - name: ERC20
           file: ./abis/ERC20.json
       eventHandlers:
         - event: Transfer(indexed address,indexed address,uint256)
-          handler: wrappedHandleShareTransfer
+          handler: wrappedHandleShareTransfer2
       file: ./src/mapping.ts
   
   - kind: ethereum/contract
@@ -601,7 +584,7 @@ dataSources:
     network: mainnet
     source:
       address: "0x5dce29e92b1b939f8e8c60dcf15bde82a85be4a9"
-      abi: V1Contract
+      abi: BadgerSett
       startBlock: 12589485
     mapping:
       kind: ethereum/events
@@ -613,24 +596,20 @@ dataSources:
         - Token
         - UserSettBalance
       abis:
-        - name: V1Contract
-          file: ./abis/V1Contract.json
-        - name: Controller
-          file: ./abis/Controller.json
-        - name: Strategy
-          file: ./abis/Strategy.json
+        - name: BadgerSett
+          file: ./abis/BadgerSett.json
         - name: ERC20
           file: ./abis/ERC20.json
       eventHandlers:
         - event: Transfer(indexed address,indexed address,uint256)
-          handler: wrappedHandleShareTransfer
+          handler: wrappedHandleShareTransfer2
       file: ./src/mapping.ts
   - kind: ethereum/contract
     name: hBTC
     network: mainnet
     source:
       address: "0x8c76970747afd5398e958bdfada4cf0b9fca16c4"
-      abi: V1Contract
+      abi: BadgerSett
       startBlock: 12589485
     mapping:
       kind: ethereum/events
@@ -642,17 +621,13 @@ dataSources:
         - Token
         - UserSettBalance
       abis:
-        - name: V1Contract
-          file: ./abis/V1Contract.json
-        - name: Controller
-          file: ./abis/Controller.json
-        - name: Strategy
-          file: ./abis/Strategy.json
+        - name: BadgerSett
+          file: ./abis/BadgerSett.json
         - name: ERC20
           file: ./abis/ERC20.json
       eventHandlers:
         - event: Transfer(indexed address,indexed address,uint256)
-          handler: wrappedHandleShareTransfer
+          handler: wrappedHandleShareTransfer2
       file: ./src/mapping.ts
   # ===== Geysers =====
   - kind: ethereum/contract
