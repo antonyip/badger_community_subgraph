@@ -7,6 +7,8 @@ type SgTransfer @entity {
   "hash"
   id: ID!
   network: SgNetwork!
+  "Token Address"
+  sett: SgSett!
   from: String!
   to: String!
   amount: BigInt!
@@ -96,20 +98,6 @@ type SgAccountRegistry @entity {
   id: ID!
   network: SgNetwork!
   accounts: [SgAccount!]
-}
-
-type SgToken @entity {
-  id: ID!
-  address: String!
-  decimals: Int!
-  name: String!
-  symbol: String!
-}
-
-type SgTokenBalance @entity {
-  id: ID!
-  balance: BigInt!
-  token: SgToken!
 }
 
 # Yearn Entities Start
