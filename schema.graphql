@@ -67,12 +67,12 @@ type SgSett @entity {
   harvests: [SgHarvest!]
 }
 
-type SgSettRegistry @entity {
-  "address"
-  id: ID!
-  network: SgNetwork!
-  setts: [SgSett!]
-}
+# type SgSettRegistry @entity {
+#   "address"
+#   id: ID!
+#   network: SgNetwork!
+#   setts: [SgSett!]
+# }
 
 type SgSettBalance @entity {
   "userSettAddress"
@@ -93,12 +93,12 @@ type SgAccount @entity {
   balances: [SgSettBalance!]
 }
 
-type SgAccountRegistry @entity {
-  "registryId"
-  id: ID!
-  network: SgNetwork!
-  accounts: [SgAccount!]
-}
+# type SgAccountRegistry @entity {
+#   "registryId"
+#   id: ID!
+#   network: SgNetwork!
+#   accounts: [SgAccount!]
+# }
 
 # Yearn Entities Start
 type Vault @entity {

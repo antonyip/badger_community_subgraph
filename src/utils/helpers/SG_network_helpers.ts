@@ -1,4 +1,5 @@
-import { SgAccount, SgNetwork, SgSettBalance } from '../../../generated/schema';
+import { SgAccount, SgHarvest, SgNetwork, SgSettBalance } from '../../../generated/schema';
+import { BIGINT_ZERO } from '../constants';
 
 export function getEthNetwork(): string {
     let net = SgNetwork.load('1')
@@ -43,4 +44,26 @@ export function sgGetOrCreateSettBalance(add: string): SgSettBalance  {
     sgSettBalance.save();
   }
   return sgSettBalance as SgSettBalance;
+}
+
+export function sgGetOrCreateHarvest(add: string): SgHarvest  {
+  let sgHarvest = SgHarvest.load(add);
+  if (sgHarvest == null)
+  {
+    sgHarvest = new SgHarvest(add);
+    sgHarvest.network = getEthNetwork();
+    sgHarvest.sett = "todo"
+    sgHarvest.performanceFee = BIGINT_ZERO
+    sgHarvest.strategistFee = BIGINT_ZERO
+    sgHarvest.withdrawFee = BIGINT_ZERO
+    sgHarvest.harvested = BIGINT_ZERO
+    sgHarvest.compounded = BIGINT_ZERO
+    sgHarvest.performance = BIGINT_ZERO
+    sgHarvest.strategist = BIGINT_ZERO
+    sgHarvest.pricePerFullShare = BIGINT_ZERO
+    sgHarvest.totalSupply = BIGINT_ZERO
+    sgHarvest.balance = BIGINT_ZERO
+    sgHarvest.save();
+  }
+  return sgHarvest as SgHarvest;
 }
