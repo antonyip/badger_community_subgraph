@@ -57,11 +57,16 @@ https://github.com/yearn/yearn-subgraph - 8e946556c7eddbbb22ebd060f5ccc6f504b85b
 - Integrate 
 
 - new addresses
-    - 0x2B5455aac8d64C14786c3a29858E43b5945819C0 - cvxcrv d
-    - 0x53c8e199eb2cb7c01543c137078a038937a68e40 - cvx d
-    - 0x55912d0cf83b75c492e761932abc4db4a5cb1b17 - pBTC d
-    - 0x5dce29e92b1b939f8e8c60dcf15bde82a85be4a9 - bBTC d
-    - 0x8c76970747afd5398e958bdfada4cf0b9fca16c4 - hBTC d
-    - 0xBE08Ef12e4a553666291E9fFC24fCCFd354F2Dd2 - tricrypto d
-    - 0xf349c0faa80fc1870306ac093f75934078e28991 - oBTC d
- 
+    - 0x2B5455aac8d64C14786c3a29858E43b5945819C0 - cvxcrv - ported
+    - 0x53c8e199eb2cb7c01543c137078a038937a68e40 - cvx - ported
+    - 0x55912d0cf83b75c492e761932abc4db4a5cb1b17 - pBTC - ported
+    - 0x5dce29e92b1b939f8e8c60dcf15bde82a85be4a9 - bBTC - ported
+    - 0x8c76970747afd5398e958bdfada4cf0b9fca16c4 - hBTC - ported
+    - 0xBE08Ef12e4a553666291E9fFC24fCCFd354F2Dd2 - tricrypto - ported
+    - 0xf349c0faa80fc1870306ac093f75934078e28991 - oBTC - ported
+
+- bsc contracts
+- matic/polygon contracts
+
+ - update entities: in subgraph.yaml
+ - "seperate" the subgraph.yaml so that it would be easier to read that file.
