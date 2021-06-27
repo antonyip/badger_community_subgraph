@@ -3,22 +3,27 @@ Here for now..
 https://thegraph.com/explorer/subgraph/antonyip/badger_community_subgraph
 
 ## Developer Dependcies
-- g++
-- git
 - curl
 - nvm
 - node
 - npm
-- yarn
-- npm install keytar --- TODO: Figure out if this is really needed
-- apt-get install libsecret-1-dev --- TODO: Figure out if this is really needed
-
+- npm install -g @graphprotocol/graph-cli
 - yarn
     - yarn codegen
     - yarn build
-- TODO: talk about access key
+- TODO: talk about access key from thegraph.com
     - yarn deploy
 
+# New Startup
+1. curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.38.0/install.sh | bash
+1. nvm install --lts
+1. npm install --global yarn
+1. npm install -g @graphprotocol/graph-cli
+1. yarn
+1. yarn codegen
+1. yarn build
+1. yarn deploy
+ 
 ### Users
 - Just go to the following page and start triggering queries..
 - https://thegraph.com/explorer/subgraph/antonyip/badger_community_subgraph
@@ -32,3 +37,31 @@ https://thegraph.com/explorer/subgraph/antonyip/badger_community_subgraph
 ### Gitcoin Bounty
 - https://github.com/Badger-Finance/gitcoin/issues/4
 
+### Other Project Commit hashes that I referenced
+https://github.com/Badger-Finance/badger-subgraph/tree/setts - 7222239bde5a6ad342b969070c4f6919db028d75
+https://github.com/axejintao/badger-dao - 45d94148c29de95146656d7c88bf938836085697
+https://github.com/yearn/yearn-subgraph - 8e946556c7eddbbb22ebd060f5ccc6f504b85bf1
+
+### TODOS?
+- What to do with
+    - utils/helpers/
+        - farm/harvest.ts
+        - geyser/geyser.ts
+        - sushi/harvest.ts
+    - The contracts are still being used on badger, however, is there a upgrade path to the new yYearn/yVault system?
+    - The contracts are hooked differently to src/mappings/oldFunctions.ts for now which do nothing.
+- Intergrate new yYearn graphs?
+    - https://github.com/yearn/yearn-vaults-v2-subgraph
+- Change all the hooks (related to yVault) on subgraph.yaml 
+    - so that we can maintain updates from yearn subgraphs and also add our own logics to our own subgraph
+- Integrate 
+
+- new addresses
+    - 0x2B5455aac8d64C14786c3a29858E43b5945819C0 - cvxcrv d
+    - 0x53c8e199eb2cb7c01543c137078a038937a68e40 - cvx d
+    - 0x55912d0cf83b75c492e761932abc4db4a5cb1b17 - pBTC d
+    - 0x5dce29e92b1b939f8e8c60dcf15bde82a85be4a9 - bBTC d
+    - 0x8c76970747afd5398e958bdfada4cf0b9fca16c4 - hBTC d
+    - 0xBE08Ef12e4a553666291E9fFC24fCCFd354F2Dd2 - tricrypto d
+    - 0xf349c0faa80fc1870306ac093f75934078e28991 - oBTC d
+ 
