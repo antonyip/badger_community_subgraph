@@ -1,19 +1,18 @@
-type Network @entity {
-  "chainId"
-  id: ID!
+type SgNetwork @entity {
+  id: ID! 
+  name: String!
 }
-  
-type Transfer @entity {
+
+type SgTransfer @entity {
   "hash"
   id: ID!
-  network: Network!
-  sett: Sett!
+  network: SgNetwork!
   from: String!
   to: String!
   amount: BigInt!
 }
 
-type BalanceData @entity {
+type SgBalanceData @entity {
   "address"
   id: ID!
   netDeposit: BigInt!
@@ -24,11 +23,11 @@ type BalanceData @entity {
   grossWithdrawShares: BigInt!
 }
 
-type Harvest @entity {
+type SgHarvest @entity {
   "hash"
   id: ID!
-  network: Network!
-  sett: Sett!
+  network: String!
+  sett: SgSett!
   performanceFee: BigInt!
   strategistFee: BigInt!
   withdrawFee: BigInt!
@@ -45,56 +44,70 @@ type Harvest @entity {
   balance: BigInt!
 }
 
-type Strategy @entity {
+type SgStrategy @entity {
   "address"
   id: ID!
-  network: Network
-  sett: Sett
+  network: SgNetwork!
+  sett: SgSett
   active: Boolean
-  harvests: [Harvest!]
+  harvests: [SgHarvest!]
 }
 
-type Sett @entity {
+type SgSett @entity {
   "address"
   id: ID!
-  network: Network
-  transfers: [Transfer!]
-  deposits: [Transfer!]
-  withdraws: [Transfer!]
-  balanceData: BalanceData
-  strategies: [Strategy!]
-  harvests: [Harvest!]
+  network: SgNetwork!
+  transfers: [SgTransfer!]
+  deposits: [SgTransfer!]
+  withdraws: [SgTransfer!]
+  balanceData: SgBalanceData
+  strategies: [SgStrategy!]
+  harvests: [SgHarvest!]
 }
 
-type SettRegistry @entity {
+type SgSettRegistry @entity {
   "address"
   id: ID!
-  network: Network
-  setts: [Sett!]
+  network: SgNetwork!
+  setts: [SgSett!]
 }
 
-type SettBalance @entity {
+type SgSettBalance @entity {
   "userSettAddress"
   id: ID!
-  network: Network
-  sett: Sett
-  account: Account
-  balanceData: BalanceData
+  network: SgNetwork!
+  sett: SgSett
+  account: SgAccount
+  balanceData: SgBalanceData
 }
 
-type Account @entity {
+type SgAccount @entity {
   "address"
   id: ID!
-  network: Network
-  deposits: [Transfer!]
-  withdraws: [Transfer!]
-  transfers: [Transfer!]
-  balances: [SettBalance!]
+  network: SgNetwork!
+  deposits: [SgTransfer!]
+  withdraws: [SgTransfer!]
+  transfers: [SgTransfer!]
+  balances: [SgSettBalance!]
 }
 
-type AccountRegistry @entity {
+type SgAccountRegistry @entity {
   "registryId"
   id: ID!
-  network: Network
-  accounts: [Account!]
+  network: SgNetwork!
+  accounts: [SgAccount!]
+}
+
+type SgToken @entity {
+  id: ID!
+  address: String!
+  decimals: Int!
+  name: String!
+  symbol: String!
+}
+
+type SgTokenBalance @entity {
+  id: ID!
+  balance: BigInt!
+  token: SgToken!
 }
