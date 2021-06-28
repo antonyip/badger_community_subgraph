@@ -7,7 +7,7 @@ import {
 import { FarmHarvest } from '../../generated/harvestFarm/StrategyHarvestMetaFarm';
 import { HarvestState } from '../../generated/harvestSushiWbtcEth/StrategySushiLpOptimizer';
 import { SgTransfer } from '../../generated/schema';
-import { getEthNetwork, sgGetOrCreateAccount } from '../utils/helpers/SG_network_helpers';
+import { getEthNetwork, sgGetOrCreateUser } from '../utils/helpers/SG_network_helpers';
 
 // What are all these functions? 
 // Previous Implementation just register them as some events but nothing was aggrigated?

@@ -14,17 +14,6 @@ type SgTransfer @entity {
   amount: BigInt!
 }
 
-type SgBalanceData @entity {
-  "address"
-  id: ID!
-  netDeposit: BigInt!
-  netDepositShares: BigInt!
-  grossDeposit: BigInt!
-  grossDepositShares: BigInt!
-  grossWithdraw: BigInt!
-  grossWithdrawShares: BigInt!
-}
-
 type SgHarvest @entity {
   "hash"
   id: ID!
@@ -49,56 +38,84 @@ type SgHarvest @entity {
 type SgStrategy @entity {
   "address"
   id: ID!
-  network: SgNetwork!
+  network: SgNetwork
   sett: SgSett
   active: Boolean
   harvests: [SgHarvest!]
 }
 
+# Ported from - Badger-DAO@Sett
 type SgSett @entity {
-  "address"
+  "address-network"
   id: ID!
-  network: SgNetwork!
+  network: SgNetwork
   transfers: [SgTransfer!]
   deposits: [SgTransfer!]
   withdraws: [SgTransfer!]
-  balanceData: SgBalanceData
+  balanceData: SgSettBalance
   strategies: [SgStrategy!]
   harvests: [SgHarvest!]
+
+  "Sett name"
+  name: String!
+  "Share token symbol"
+  symbol: String!
+  "Deposit token"
+  token: Token!
+  "Deposit token per share"
+  pricePerFullShare: BigInt!
+  "Shares outstanding"
+  balance: BigInt!
+  "Deposit tokens outstanding"
+  totalSupply: BigInt!
+  "Current sett deposit token value"
+  netDeposit: BigInt!
+  "Total sett deposit token value"
+  grossDeposit: BigInt!
+  "Total sett withdraw token value"
+  grossWithdraw: BigInt!
+  "Current sett deposit share value"
+  netShareDeposit: BigInt!
+  "Total sett deposit share value"
+  grossShareDeposit: BigInt!
+  "Total sett withdraw share value"
+  grossShareWithdraw: BigInt!
 }
 
-# type SgSettRegistry @entity {
-#   "address"
-#   id: ID!
-#   network: SgNetwork!
-#   setts: [SgSett!]
-# }
-
+# Ported from - Badger-DAO@UserSettBalance
 type SgSettBalance @entity {
-  "userSettAddress"
+  "address-network-token"
   id: ID!
+  "address"
+  user: SgUser!
+  "setttoken"
+  sett: SgSett!
+  "network"
   network: SgNetwork!
-  sett: SgSett
-  account: SgAccount
-  balanceData: SgBalanceData
+  "Current sett deposit token value"
+  netDeposit: BigInt!
+  "Total sett deposit token value"
+  grossDeposit: BigInt!
+  "Total sett withdraw token value"
+  grossWithdraw: BigInt!
+  "Current sett deposit share value"
+  netShareDeposit: BigInt!
+  "Total sett deposit share value"
+  grossShareDeposit: BigInt!
+  "Total sett withdraw share value"
+  grossShareWithdraw: BigInt!
 }
 
-type SgAccount @entity {
+# Ported from - Badger-DAO@User
+type SgUser @entity {
   "address"
   id: ID!
   network: SgNetwork!
   deposits: [SgTransfer!]
   withdraws: [SgTransfer!]
   transfers: [SgTransfer!]
-  balances: [SgSettBalance!]
+  balances: [SgSettBalance!] @derivedFrom(field: "user")
 }
-
-# type SgAccountRegistry @entity {
-#   "registryId"
-#   id: ID!
-#   network: SgNetwork!
-#   accounts: [SgAccount!]
-# }
 
 ##### Yearn Entities Start #####
 type Vault @entity {
@@ -321,67 +338,3 @@ type Transaction @entity {
 }
 
 ##### Yearn Entities End #####
-
-##### Badger-Dao Entities Start #####
-type User @entity {
-  id: ID!
-  settBalances: [UserSettBalance!]! @derivedFrom(field: "user")
-}
-
-type Sett @entity {
-  id: ID!
-  "Sett name"
-  name: String!
-  "Share token symbol"
-  symbol: String!
-  "Deposit token"
-  token: Token!
-  "Deposit token per share"
-  pricePerFullShare: BigInt!
-  "Shares outstanding"
-  balance: BigInt!
-  "Deposit tokens outstanding"
-  totalSupply: BigInt!
-  "Current sett deposit token value"
-  netDeposit: BigInt!
-  "Total sett deposit token value"
-  grossDeposit: BigInt!
-  "Total sett withdraw token value"
-  grossWithdraw: BigInt!
-  "Current sett deposit share value"
-  netShareDeposit: BigInt!
-  "Total sett deposit share value"
-  grossShareDeposit: BigInt!
-  "Total sett withdraw share value"
-  grossShareWithdraw: BigInt!
-}
-
-type UserSettBalance @entity {
-  id: ID!
-  user: User!
-  sett: Sett!
-  "Current sett deposit token value"
-  netDeposit: BigInt!
-  "Total sett deposit token value"
-  grossDeposit: BigInt!
-  "Total sett withdraw token value"
-  grossWithdraw: BigInt!
-  "Current sett deposit share value"
-  netShareDeposit: BigInt!
-  "Total sett deposit share value"
-  grossShareDeposit: BigInt!
-  "Total sett withdraw share value"
-  grossShareWithdraw: BigInt!
-}
-
-# Not Used - I think its okay to use yVault's
-# Version because its only used as an identifier.
-# type Token @entity {
-#   id: ID!
-#   decimals: BigInt!
-#   name: String!
-#   symbol: String!
-#   totalSupply: BigInt!
-# }
-
-##### Badger-Dao Entities End #####

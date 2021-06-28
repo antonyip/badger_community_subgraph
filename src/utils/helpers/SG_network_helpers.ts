@@ -1,4 +1,4 @@
-import { SgAccount, SgHarvest, SgNetwork, SgSettBalance } from '../../../generated/schema';
+import { SgUser, SgHarvest, SgNetwork, SgSettBalance } from '../../../generated/schema';
 import { BIGINT_ZERO } from '../constants';
 
 export function getEthNetwork(): string {
@@ -23,15 +23,15 @@ export function getBscNetwork(): string {
   return net.id;
 }
 
-export function sgGetOrCreateAccount(add: string): SgAccount  {
-  let sgAccount = SgAccount.load(add);
-  if (sgAccount == null)
+export function sgGetOrCreateUser(add: string): SgUser  {
+  let sgUser = SgUser.load(add);
+  if (sgUser == null)
   {
-    sgAccount = new SgAccount(add);
-    sgAccount.network = getEthNetwork();
-    sgAccount.save();
+    sgUser = new SgUser(add);
+    sgUser.network = getEthNetwork();
+    sgUser.save();
   }
-  return sgAccount as SgAccount;
+  return sgUser as SgUser;
 }
 
 export function sgGetOrCreateSettBalance(add: string): SgSettBalance  {
@@ -40,7 +40,7 @@ export function sgGetOrCreateSettBalance(add: string): SgSettBalance  {
   {
     sgSettBalance = new SgSettBalance(add);
     sgSettBalance.network = getEthNetwork();
-    sgSettBalance.account = sgGetOrCreateAccount(add).id;
+    sgSettBalance.user = sgGetOrCreateUser(add).id;
     sgSettBalance.save();
   }
   return sgSettBalance as SgSettBalance;

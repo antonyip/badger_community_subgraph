@@ -1,8 +1,8 @@
 import { Address, BigInt, log } from "@graphprotocol/graph-ts"
 import { 
-  User,
-  Sett,
-  UserSettBalance,
+  SgUser,
+  SgSett,
+  SgSettBalance,
   Token,
  } from "../../generated/schema"
  import { BadgerSett } from "../../generated/oBTC/BadgerSett"
@@ -10,7 +10,7 @@ import {
  //import { AffiliateVault } from "../generated/YFI-WBTC/AffiliateVault"
  import { NO_ADDR, ZERO } from "./constants"
 
-export function handleSettWithdraw(userBalance: UserSettBalance, share: BigInt, token: BigInt): void {
+export function handleSettWithdraw(userBalance: SgSettBalance, share: BigInt, token: BigInt): void {
   userBalance.netDeposit = userBalance.netDeposit.minus(token);
   userBalance.grossWithdraw = userBalance.grossWithdraw.plus(token);
   userBalance.netShareDeposit = userBalance.netShareDeposit.minus(share);
@@ -18,7 +18,7 @@ export function handleSettWithdraw(userBalance: UserSettBalance, share: BigInt, 
   userBalance.save();
 }
 
-export function handleSettDeposit(userBalance: UserSettBalance, share: BigInt, token: BigInt): void {
+export function handleSettDeposit(userBalance: SgSettBalance, share: BigInt, token: BigInt): void {
   userBalance.netDeposit = userBalance.netDeposit.plus(token);
   userBalance.grossDeposit = userBalance.grossDeposit.plus(token);
   userBalance.netShareDeposit = userBalance.netShareDeposit.plus(share);
@@ -26,22 +26,22 @@ export function handleSettDeposit(userBalance: UserSettBalance, share: BigInt, t
   userBalance.save();
 }
 
-export function getOrCreateUser(address: Address): User {
-  let user = User.load(address.toHexString());
+export function getOrCreateUser(address: Address): SgUser {
+  let user = SgUser.load(address.toHexString());
 
   if (user == null) {
-    user = new User(address.toHexString());
+    user = new SgUser(address.toHexString());
   }
 
-  return user as User;
+  return user as SgUser;
 }
 
-export function getOrCreateSett(address: Address): Sett {
-  let sett = Sett.load(address.toHexString());
+export function getOrCreateSett(address: Address): SgSett {
+  let sett = SgSett.load(address.toHexString());
   let contract = BadgerSett.bind(address);
 
   if (sett == null) {
-    sett = new Sett(address.toHexString());
+    sett = new SgSett(address.toHexString());
     sett.name = "";
     sett.symbol = "";
     sett.token = "";
@@ -69,15 +69,15 @@ export function getOrCreateSett(address: Address): Sett {
   sett.balance = !balance.reverted ? balance.value : sett.balance;
   sett.totalSupply = !totalSupply.reverted ? totalSupply.value : sett.totalSupply;
 
-  return sett as Sett;
+  return sett as SgSett;
 }
 
-export function getOrCreateSettBalance(user: User, sett: Sett): UserSettBalance {
+export function getOrCreateSettBalance(user: SgUser, sett: SgSett): SgSettBalance {
   let settBalanceId = user.id.concat("-").concat(sett.id);
-  let settBalance = UserSettBalance.load(settBalanceId);
+  let settBalance = SgSettBalance.load(settBalanceId);
 
   if (settBalance == null) {
-    settBalance = new UserSettBalance(settBalanceId);
+    settBalance = new SgSettBalance(settBalanceId);
     settBalance.sett = sett.id;
     settBalance.user = user.id;
     settBalance.netDeposit = ZERO;
@@ -88,7 +88,7 @@ export function getOrCreateSettBalance(user: User, sett: Sett): UserSettBalance 
     settBalance.grossShareWithdraw = ZERO;
   }
 
-  return settBalance as UserSettBalance;
+  return settBalance as SgSettBalance;
 }
 
 export function getOrCreateToken(address: Address): Token {
