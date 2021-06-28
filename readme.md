@@ -42,7 +42,7 @@ https://github.com/Badger-Finance/badger-subgraph/tree/setts - 7222239bde5a6ad34
 https://github.com/axejintao/badger-dao - 45d94148c29de95146656d7c88bf938836085697
 https://github.com/yearn/yearn-subgraph - 8e946556c7eddbbb22ebd060f5ccc6f504b85bf1
 
-### TODOS?
+### TODOS...
 - What to do with
     - utils/helpers/
         - farm/harvest.ts
@@ -67,6 +67,8 @@ https://github.com/yearn/yearn-subgraph - 8e946556c7eddbbb22ebd060f5ccc6f504b85b
 
 - bsc contracts
 - matic/polygon contracts
-
- - update entities: in subgraph.yaml
- - "seperate" the subgraph.yaml so that it would be easier to read that file.
+- update entities: in subgraph.yaml
+- "seperate" the subgraph.yaml so that it would be easier to read that file.
+- UWE wants fees calculated
+- write something to maintain "Geysers in consts"
+- Figure out how to do testing on limited datasets as a full graph upload will take 12+ hours

@@ -12,7 +12,6 @@ import { getEthNetwork, sgGetOrCreateAccount } from '../utils/helpers/SG_network
 // What are all these functions? 
 // Previous Implementation just register them as some events but nothing was aggrigated?
 
-//Assuming Staked is the same as Un-Stake
 //Staked (index_topic_1 address user, uint256 amount, uint256 total, index_topic_2 uint256 timestamp, index_topic_3 uint256 blockNumber, bytes data)
 export function handleStaked(event: Staked): void {
 /*
