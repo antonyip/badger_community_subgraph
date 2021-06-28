@@ -2,19 +2,29 @@ import { Transfer } from '../../generated/oBTC/BadgerSett';
 import { sgGetOrCreateAccount, sgGetOrCreateHarvest } from '../utils/helpers/SG_network_helpers';
 import { BIGINT_ZERO, GEYSERS, NORMALIZER, NO_ADDR } from '../utils/constants';
 import { handleSettDeposit, handleSettWithdraw, getOrCreateSett, getOrCreateSettBalance, getOrCreateUser } from "../utils/sett-util";
+import { BigDecimal, BigInt, Address} from '@graphprotocol/graph-ts';
 
 function isValidUser(address: string): boolean {
   return address != NO_ADDR && !GEYSERS.includes(address);
 }
 
-export function settLogic(event: Transfer): void {
+export function settLogic(
+  addressSett: Address,
+  fromUser: Address,
+  toUser: Address,
+  share: BigInt,
+  ): void {
   // get relevant entities
-  let sett = getOrCreateSett(event.address);
-  let from = getOrCreateUser(event.params.from);
-  let to = getOrCreateUser(event.params.to);
+  //let sett = getOrCreateSett(event.address);
+  let sett = getOrCreateSett(addressSett);
+  //let from = getOrCreateUser(event.params.from);
+  let from = getOrCreateUser(fromUser);  
+  //let to = getOrCreateUser(event.params.to);
+  let to = getOrCreateUser(fromUser);
+  
 
   // get share and token values
-  let share = event.params.value;
+  //let share = event.params.value;
   let token = share.times(sett.pricePerFullShare).div(NORMALIZER);
 
   // get user balances
@@ -22,7 +32,7 @@ export function settLogic(event: Transfer): void {
   let toBalance = getOrCreateSettBalance(to, sett);
 
   // deposit
-  if (event.params.from.toHexString() == NO_ADDR) {
+  if (fromUser.toHexString() == NO_ADDR) {
     handleSettDeposit(toBalance, share, token);
     sett.netDeposit = sett.netDeposit.plus(token);
     sett.grossDeposit = sett.grossDeposit.plus(token);
@@ -31,7 +41,7 @@ export function settLogic(event: Transfer): void {
   }
 
   // withdrawal
-  if (event.params.to.toHexString() == NO_ADDR) {
+  if (toUser.toHexString() == NO_ADDR) {
     handleSettWithdraw(fromBalance, share, token);
     sett.netDeposit = sett.netDeposit.minus(token);
     sett.grossWithdraw = sett.grossWithdraw.plus(token);
@@ -40,7 +50,7 @@ export function settLogic(event: Transfer): void {
   }
 
   // transfer
-  if (isValidUser(event.params.from.toHexString()) && isValidUser(event.params.to.toHexString())) {
+  if (isValidUser(fromUser.toHexString()) && isValidUser(toUser.toHexString())) {
     handleSettWithdraw(fromBalance, share, token);
     handleSettDeposit(toBalance, share, token);
   }
