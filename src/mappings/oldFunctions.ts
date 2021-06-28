@@ -7,7 +7,7 @@ import {
 import { FarmHarvest } from '../../generated/harvestFarm/StrategyHarvestMetaFarm';
 import { HarvestState } from '../../generated/harvestSushiWbtcEth/StrategySushiLpOptimizer';
 import { SgHarvest, SgTransfer, SgGeyser, SgStrategy } from '../../generated/schema';
-import { getEthNetwork } from '../utils/helpers/SG_network_helpers';
+import { getEthNetwork } from '../utils/helpers/network';
 import { BigInt, Address} from '@graphprotocol/graph-ts';
 import { ZERO } from '../utils/constants';
 

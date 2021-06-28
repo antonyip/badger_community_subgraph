@@ -1,5 +1,6 @@
-import { SgUser, SgHarvest, SgNetwork, SgSettBalance } from '../../../generated/schema';
-import { BIGINT_ZERO } from '../constants';
+import { SgNetwork, } from '../../../generated/schema';
+
+// TODO: work on the automatic network getter
 
 export function getEthNetwork(): string {
     let net = SgNetwork.load('1')

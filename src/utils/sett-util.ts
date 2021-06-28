@@ -9,7 +9,7 @@ import {
  import { ERC20 } from "../../generated/oBTC/ERC20"
  //import { AffiliateVault } from "../generated/YFI-WBTC/AffiliateVault"
  import { NO_ADDR, ZERO } from "./constants"
-import { getEthNetwork } from "./helpers/SG_network_helpers"
+import { getEthNetwork } from "./helpers/network"
 
 export function handleSettWithdraw(userBalance: SgSettBalance, share: BigInt, token: BigInt): void {
   userBalance.netDeposit = userBalance.netDeposit.minus(token);

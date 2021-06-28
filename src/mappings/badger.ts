@@ -2,7 +2,7 @@ import { Address, Value, BigDecimal, BigInt } from '@graphprotocol/graph-ts';
 
 import { Transfer } from '../../generated/Badger/MiniMeToken';
 import { SgTransfer } from '../../generated/schema'
-import { getEthNetwork } from '../utils/helpers/SG_network_helpers'
+import { getEthNetwork } from '../utils/helpers/network'
 import { getOrCreateUser } from '../utils/sett-util';
 
 export function handleBadgerTransfer(event: Transfer): void {

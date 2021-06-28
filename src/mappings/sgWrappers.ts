@@ -1,6 +1,6 @@
 import { handleShareTransfer } from './yVault';
 import { Transfer } from '../../generated/nativeBadgerSett/V1Contract';
-import { settLogic } from './sgWrappers3';
+import { settLogic } from './sett';
 
 
 export function wrappedHandleShareTransfer(event: Transfer): void {
