@@ -5,7 +5,7 @@ import {
   } from '../../generated/nativeBadgerGeyser/BadgerGeyser';
 
 import { SgTransfer, SgGeyser } from '../../generated/schema';
-import { getEthNetwork } from '../utils/helpers/network';
+import { getCurrentNetwork } from '../utils/helpers/network';
 import { Address} from '@graphprotocol/graph-ts';
 import { ZERO } from '../utils/constants';
 
@@ -16,7 +16,7 @@ export function getOrCreateGeyser(add: Address) : SgGeyser {
   if (sgGeyser == null)
   {
     sgGeyser = new SgGeyser(add.toHexString())
-    sgGeyser.network = getEthNetwork();
+    sgGeyser.network = getCurrentNetwork();
     sgGeyser.netDeposit = ZERO;
     sgGeyser.grossDeposit = ZERO;
     sgGeyser.grossWithdraw = ZERO;
@@ -37,7 +37,7 @@ export function handleStaked(event: Staked): void {
 
   // make a transaction
   let sgTransfer = new SgTransfer(stakeId);
-  sgTransfer.network = getEthNetwork();
+  sgTransfer.network = getCurrentNetwork();
   sgTransfer.from = event.transaction.from.toHexString();
   sgTransfer.to = event.transaction.to.toHexString();
   sgTransfer.sett = event.address.toHexString()
@@ -64,7 +64,7 @@ export function handleUnstaked(event: Unstaked): void {
 
   // make a transaction
   let sgTransfer = new SgTransfer(unstakeId);
-  sgTransfer.network = getEthNetwork();
+  sgTransfer.network = getCurrentNetwork();
   sgTransfer.from = event.transaction.from.toHexString();
   sgTransfer.to = event.transaction.to.toHexString();
   sgTransfer.sett = event.address.toHexString()

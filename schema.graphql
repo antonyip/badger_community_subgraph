@@ -20,7 +20,7 @@ type SgHarvest @entity {
   "hash"
   id: ID!
   network: SgNetwork
-  sett: SgSett!
+  sett: SgSett
   performanceFee: BigInt!
   strategistFee: BigInt!
   withdrawFee: BigInt!

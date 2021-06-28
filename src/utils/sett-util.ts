@@ -9,7 +9,7 @@ import {
  import { ERC20 } from "../../generated/oBTC/ERC20"
  //import { AffiliateVault } from "../generated/YFI-WBTC/AffiliateVault"
  import { NO_ADDR, ZERO } from "./constants"
-import { getEthNetwork } from "./helpers/network"
+import { getCurrentNetwork } from "./helpers/network"
 
 export function handleSettWithdraw(userBalance: SgSettBalance, share: BigInt, token: BigInt): void {
   userBalance.netDeposit = userBalance.netDeposit.minus(token);
@@ -32,7 +32,7 @@ export function getOrCreateUser(address: Address): SgUser {
 
   if (user == null) {
     user = new SgUser(address.toHexString());
-    user.network = getEthNetwork();
+    user.network = getCurrentNetwork();
   }
 
   return user as SgUser;
@@ -44,7 +44,7 @@ export function getOrCreateSett(address: Address): SgSett {
 
   if (sett == null) {
     sett = new SgSett(address.toHexString());
-    sett.network = getEthNetwork();
+    sett.network = getCurrentNetwork();
     sett.name = "";
     sett.symbol = "";
     sett.token = "";
@@ -94,7 +94,7 @@ export function getOrCreateSettBalance(user: SgUser, sett: SgSett): SgSettBalanc
     settBalance.sett = sett.id;
     settBalance.user = user.id;
     settBalance.netDeposit = ZERO;
-    settBalance.network = getEthNetwork();
+    settBalance.network = getCurrentNetwork();
     settBalance.grossDeposit = ZERO;
     settBalance.grossWithdraw = ZERO;
     settBalance.netShareDeposit = ZERO;

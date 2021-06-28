@@ -2,13 +2,13 @@ import { Address, Value, BigDecimal, BigInt } from '@graphprotocol/graph-ts';
 
 import { Transfer } from '../../generated/Badger/MiniMeToken';
 import { SgTransfer } from '../../generated/schema'
-import { getEthNetwork } from '../utils/helpers/network'
+import { getCurrentNetwork } from '../utils/helpers/network'
 import { getOrCreateUser } from '../utils/sett-util';
 
 export function handleBadgerTransfer(event: Transfer): void {
   // Record the Transfer
   let sgTransfer = new SgTransfer(event.transaction.hash.toHexString());
-  sgTransfer.network = getEthNetwork();
+  sgTransfer.network = getCurrentNetwork();
   sgTransfer.from = event.transaction.from.toHexString();
   sgTransfer.to = event.transaction.to.toHexString();
   sgTransfer.sett = "0x3472a5a71965499acd81997a54bba8d852c6e53d"
