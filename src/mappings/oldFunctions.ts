@@ -29,7 +29,7 @@ export function handleStaked(event: Staked): void {
 
   let stake = getOrCreateGeyserStakedEvent(stakeId, geyser.id, event);
   stake.save();
-  */
+*/
 }
 
 //Unstaked (index_topic_1 address user, uint256 amount, uint256 total, index_topic_2 uint256 timestamp, index_topic_3 uint256 blockNumber, bytes data)

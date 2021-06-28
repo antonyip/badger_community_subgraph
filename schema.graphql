@@ -100,7 +100,7 @@ type SgAccount @entity {
 #   accounts: [SgAccount!]
 # }
 
-# Yearn Entities Start
+##### Yearn Entities Start #####
 type Vault @entity {
   id: ID!
   "Amount of underlying token per 1 share"
@@ -222,6 +222,8 @@ type Token @entity {
   decimals: Int!
   name: String!
   symbol: String!
+  "Additional Data needed for BadgerDao"
+  totalSupply: BigInt
 }
 
 type Transfer @entity {
@@ -318,4 +320,68 @@ type Transaction @entity {
   vaultsUpdated: [Vault!]! @derivedFrom(field: "transaction")
 }
 
-# Yearn Entities End
+##### Yearn Entities End #####
+
+##### Badger-Dao Entities Start #####
+type User @entity {
+  id: ID!
+  settBalances: [UserSettBalance!]! @derivedFrom(field: "user")
+}
+
+type Sett @entity {
+  id: ID!
+  "Sett name"
+  name: String!
+  "Share token symbol"
+  symbol: String!
+  "Deposit token"
+  token: Token!
+  "Deposit token per share"
+  pricePerFullShare: BigInt!
+  "Shares outstanding"
+  balance: BigInt!
+  "Deposit tokens outstanding"
+  totalSupply: BigInt!
+  "Current sett deposit token value"
+  netDeposit: BigInt!
+  "Total sett deposit token value"
+  grossDeposit: BigInt!
+  "Total sett withdraw token value"
+  grossWithdraw: BigInt!
+  "Current sett deposit share value"
+  netShareDeposit: BigInt!
+  "Total sett deposit share value"
+  grossShareDeposit: BigInt!
+  "Total sett withdraw share value"
+  grossShareWithdraw: BigInt!
+}
+
+type UserSettBalance @entity {
+  id: ID!
+  user: User!
+  sett: Sett!
+  "Current sett deposit token value"
+  netDeposit: BigInt!
+  "Total sett deposit token value"
+  grossDeposit: BigInt!
+  "Total sett withdraw token value"
+  grossWithdraw: BigInt!
+  "Current sett deposit share value"
+  netShareDeposit: BigInt!
+  "Total sett deposit share value"
+  grossShareDeposit: BigInt!
+  "Total sett withdraw share value"
+  grossShareWithdraw: BigInt!
+}
+
+# Not Used - I think its okay to use yVault's
+# Version because its only used as an identifier.
+# type Token @entity {
+#   id: ID!
+#   decimals: BigInt!
+#   name: String!
+#   symbol: String!
+#   totalSupply: BigInt!
+# }
+
+##### Badger-Dao Entities End #####
