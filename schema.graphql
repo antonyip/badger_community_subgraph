@@ -17,7 +17,7 @@ type SgTransfer @entity {
 type SgHarvest @entity {
   "hash"
   id: ID!
-  network: String!
+  network: SgNetwork
   sett: SgSett!
   performanceFee: BigInt!
   strategistFee: BigInt!
@@ -44,18 +44,40 @@ type SgStrategy @entity {
   harvests: [SgHarvest!]
 }
 
+# type SgSettContract @entity {
+#   "address-network"
+#   id: ID!
+#   network: SgNetwork
+#   transfers: [SgTransfer!]
+#   deposits: [SgTransfer!]
+#   withdraws: [SgTransfer!]
+#   balanceData: SgSettBalance
+#   strategies: [SgStrategy!]
+#   harvests: [SgHarvest!]
+# }
+
+type SgGeyser @entity {
+  "address-network"
+  id: ID!
+  "TODO: eth / bsc"
+  network: SgNetwork
+  "staked"
+  deposits: [SgTransfer!]
+  "unstaked"
+  withdraws: [SgTransfer!]
+  "Current Geyser deposit token value"
+  netDeposit: BigInt!
+  "Total sett deposit token value"
+  grossDeposit: BigInt!
+  "Total sett withdraw token value"
+  grossWithdraw: BigInt!
+}
+
 # Ported from - Badger-DAO@Sett
 type SgSett @entity {
   "address-network"
   id: ID!
   network: SgNetwork
-  transfers: [SgTransfer!]
-  deposits: [SgTransfer!]
-  withdraws: [SgTransfer!]
-  balanceData: SgSettBalance
-  strategies: [SgStrategy!]
-  harvests: [SgHarvest!]
-
   "Sett name"
   name: String!
   "Share token symbol"

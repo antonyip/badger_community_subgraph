@@ -1,6 +1,6 @@
 import { handleShareTransfer } from './yVault';
 import { Transfer } from '../../generated/nativeBadgerSett/V1Contract';
-import { sgGetOrCreateUser, sgGetOrCreateHarvest } from '../utils/helpers/SG_network_helpers';
+//import { sgGetOrCreateUser, sgGetOrCreateHarvest } from '../utils/helpers/SG_network_helpers';
 import { BIGINT_ZERO } from '../utils/constants';
 import { settLogic } from './sgWrappers3';
 

@@ -2,7 +2,8 @@ import { Address } from '@graphprotocol/graph-ts';
 
 import { Transfer, UFragments } from '../../generated/Digg/UFragments';
 import { SgTransfer } from '../../generated/schema'
-import { getEthNetwork, sgGetOrCreateUser } from '../utils/helpers/SG_network_helpers'
+import { getEthNetwork } from '../utils/helpers/SG_network_helpers'
+import { getOrCreateUser } from '../utils/sett-util';
 
 export function handleDiggTransfer(event: Transfer): void {
   // Record the Transfer
@@ -14,12 +15,18 @@ export function handleDiggTransfer(event: Transfer): void {
   sgTransfer.amount = event.transaction.value;
   sgTransfer.save();
 
-    // Update User Transactions
-    let sgAccountFrom = sgGetOrCreateUser(sgTransfer.from);
+  // Update User Transactions
+  if (event.transaction.from != null)
+  {
+    let sgAccountFrom = getOrCreateUser(event.transaction.from as Address);
     sgAccountFrom.transfers.push(sgTransfer.id);
     sgAccountFrom.save();
-  
-    let sgAccountTo = sgGetOrCreateUser(sgTransfer.to);
+  }
+
+  if (event.transaction.to != null)
+  {
+    let sgAccountTo = getOrCreateUser(event.transaction.to as Address);
     sgAccountTo.transfers.push(sgTransfer.id);
     sgAccountTo.save();
+  }
 }

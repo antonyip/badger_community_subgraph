@@ -1,5 +1,5 @@
 import { Transfer } from '../../generated/oBTC/BadgerSett';
-import { sgGetOrCreateUser, sgGetOrCreateHarvest } from '../utils/helpers/SG_network_helpers';
+//import { sgGetOrCreateUser, sgGetOrCreateHarvest } from '../utils/helpers/SG_network_helpers';
 import { BIGINT_ZERO, GEYSERS, NORMALIZER, NO_ADDR } from '../utils/constants';
 import { handleSettDeposit, handleSettWithdraw, getOrCreateSett, getOrCreateSettBalance, getOrCreateUser } from "../utils/sett-util";
 import { BigDecimal, BigInt, Address} from '@graphprotocol/graph-ts';

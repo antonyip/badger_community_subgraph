@@ -2,7 +2,8 @@ import { Address, Value, BigDecimal, BigInt } from '@graphprotocol/graph-ts';
 
 import { Transfer } from '../../generated/Badger/MiniMeToken';
 import { SgTransfer } from '../../generated/schema'
-import { getEthNetwork, sgGetOrCreateUser } from '../utils/helpers/SG_network_helpers'
+import { getEthNetwork } from '../utils/helpers/SG_network_helpers'
+import { getOrCreateUser } from '../utils/sett-util';
 
 export function handleBadgerTransfer(event: Transfer): void {
   // Record the Transfer
@@ -15,13 +16,19 @@ export function handleBadgerTransfer(event: Transfer): void {
   sgTransfer.save();
 
   // Update User Transactions
-  let sgAccountFrom = sgGetOrCreateUser(sgTransfer.from);
-  sgAccountFrom.transfers.push(sgTransfer.id);
-  sgAccountFrom.save();
+  if (event.transaction.from != null)
+  {
+    let sgAccountFrom = getOrCreateUser(event.transaction.from as Address);
+    sgAccountFrom.transfers.push(sgTransfer.id);
+    sgAccountFrom.save();
+  }
 
-  let sgAccountTo = sgGetOrCreateUser(sgTransfer.to);
-  sgAccountTo.transfers.push(sgTransfer.id);
-  sgAccountTo.save();
+  if (event.transaction.to != null)
+  {
+    let sgAccountTo = getOrCreateUser(event.transaction.to as Address);
+    sgAccountTo.transfers.push(sgTransfer.id);
+    sgAccountTo.save();
+  }
 }
 
 

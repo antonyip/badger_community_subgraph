@@ -52,6 +52,7 @@ dataSources:
         - event: Transfer(indexed address,indexed address,uint256)
           handler: handleDiggTransfer
       file: ./src/mapping.ts
+
   # ===== Setts =====
 
   - kind: ethereum/contract
@@ -450,6 +451,35 @@ dataSources:
         - event: Transfer(indexed address,indexed address,uint256)
           handler: wrappedHandleShareTransfer
       file: ./src/mapping.ts
+
+  # ===== Newer Setts =====
+
+  - kind: ethereum/contract
+    name: oBTC
+    network: mainnet
+    source:
+      address: "0xf349c0faa80fc1870306ac093f75934078e28991"
+      abi: BadgerSett
+      startBlock: 12589485
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      entities:
+        - Sett
+        - User
+        - Token
+        - UserSettBalance
+      abis:
+        - name: BadgerSett
+          file: ./abis/BadgerSett.json
+        - name: ERC20
+          file: ./abis/ERC20.json
+      eventHandlers:
+        - event: Transfer(indexed address,indexed address,uint256)
+          handler: wrappedHandleShareTransfer2
+      file: ./src/mapping.ts
+
   - kind: ethereum/contract
     name: tricrypto
     network: mainnet
@@ -554,32 +584,6 @@ dataSources:
       file: ./src/mapping.ts
   
   - kind: ethereum/contract
-    name: oBTC
-    network: mainnet
-    source:
-      address: "0xf349c0faa80fc1870306ac093f75934078e28991"
-      abi: BadgerSett
-      startBlock: 12589485
-    mapping:
-      kind: ethereum/events
-      apiVersion: 0.0.4
-      language: wasm/assemblyscript
-      entities:
-        - Sett
-        - User
-        - Token
-        - UserSettBalance
-      abis:
-        - name: BadgerSett
-          file: ./abis/BadgerSett.json
-        - name: ERC20
-          file: ./abis/ERC20.json
-      eventHandlers:
-        - event: Transfer(indexed address,indexed address,uint256)
-          handler: wrappedHandleShareTransfer2
-      file: ./src/mapping.ts
-  
-  - kind: ethereum/contract
     name: bBTC
     network: mainnet
     source:
@@ -629,7 +633,9 @@ dataSources:
         - event: Transfer(indexed address,indexed address,uint256)
           handler: wrappedHandleShareTransfer2
       file: ./src/mapping.ts
+
   # ===== Geysers =====
+
   - kind: ethereum/contract
     name: nativeBadgerGeyser
     network: mainnet

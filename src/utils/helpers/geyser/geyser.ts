@@ -13,6 +13,7 @@ import {
 } from '../../../../generated/schema';
 import { BIGINT_ZERO } from '../../constants';
 
+/*
 export function getOrCreateTransaction(
   id: String,
   createIfNotFound: boolean = true,
@@ -88,3 +89,4 @@ export function getOrCreateGeyser(
 
   return geyser as Geyser;
 }
+*/
