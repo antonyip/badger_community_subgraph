@@ -72,7 +72,7 @@ https://github.com/yearn/yearn-subgraph - 8e946556c7eddbbb22ebd060f5ccc6f504b85b
 - UWE wants fees calculated
 - write something to maintain "Geysers in consts"
 - Figure out how to do testing on limited datasets as a full graph upload will take 12+ hours
-
+- port this diff https://github.com/Badger-Finance/badger-subgraph/compare/bsc
 ### June 27 2021
 - 1 no ported contracts. (failed)
 - 2 just 2 contracts turned on. (success)
@@ -90,6 +90,8 @@ https://github.com/yearn/yearn-subgraph - 8e946556c7eddbbb22ebd060f5ccc6f504b85b
 
 ### try 2
 - 2 all contracts (all logic)
+
+### June 28 2021
 
 ### FarmHarvestExample - FarmHarvest
 - https://etherscan.io/tx/0x01351662598d1e8dcede81590e6de2c81efdd3e72829b5c9c21e0229e2738dbc#eventlog

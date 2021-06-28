@@ -964,6 +964,28 @@ dataSources:
         - event: HarvestState(uint256,uint256,uint256,uint256,uint256,uint256,uint256)
           handler: handleSushiHarvest
       file: ./src/mapping.ts
+
+  - kind: ethereum/contract
+    name: harvestSushiIbBTCWbtc
+    network: mainnet
+    source:
+      address: "0xf4146A176b09C664978e03d28d07Db4431525dAd"
+      abi: StrategySushiLpOptimizer
+      startBlock: 11537600
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      entities:
+        - SushiHarvestEvent
+      abis:
+        - name: StrategySushiLpOptimizer
+          file: ./abis/StrategySushiLpOptimizer.json
+      eventHandlers:
+        - event: HarvestState(uint256,uint256,uint256,uint256,uint256,uint256,uint256)
+          handler: handleSushiHarvest
+      file: ./src/mapping.ts
+
   - kind: ethereum/contract
     name: harvestSushiWbtcEth
     network: mainnet
