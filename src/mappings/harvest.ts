@@ -1,9 +1,18 @@
 import { FarmHarvest } from '../../generated/harvestFarm/StrategyHarvestMetaFarm';
 import { HarvestState } from '../../generated/harvestSushiWbtcEth/StrategySushiLpOptimizer';
 import { SgHarvest } from '../../generated/schema';
-import { getEthNetwork } from '../utils/helpers/network';
-import { BigInt, } from '@graphprotocol/graph-ts';
-import { ZERO } from '../utils/constants';
+import { getCurrentNetwork } from '../utils/helpers/network';
+import { BigInt, Address} from '@graphprotocol/graph-ts';
+import { ZERO ,BIGINT_ONE } from '../utils/constants';
+import { toDecimal } from '../utils/decimals';
+import {
+  getOrCreateHarvest,
+  getOrCreateStrategy,
+  getOrCreateToken,
+  getOrCreateTransaction,
+  getOrCreateVault,
+} from '../utils/helpers';
+
 /////////////////// Harvest events handling ///////////////////////////// 
 class CommonHarvestData {
   id: string;
@@ -15,6 +24,9 @@ class CommonHarvestData {
   toBadgerTree: BigInt; // not sure what this is.. TODO: ask
   timestamp :BigInt;
   blockNumber :BigInt;
+  // // TODO ADD
+  // strategyAddress: Address;
+  // transactionID: string; // hash
 }
 
 function handleCommonHarvestEvent(commonHarvestData: CommonHarvestData): void
@@ -25,20 +37,22 @@ function handleCommonHarvestEvent(commonHarvestData: CommonHarvestData): void
     sgHarvest = new SgHarvest(commonHarvestData.id);
   }
 
-  sgHarvest.id = commonHarvestData.id;
-  sgHarvest.network = getEthNetwork();
+  sgHarvest.network = getCurrentNetwork();
   sgHarvest.sett = commonHarvestData.settAddress;
   sgHarvest.performanceFee = commonHarvestData.governancePerformanceFee;
   sgHarvest.strategistFee = commonHarvestData.strategistPerformanceFee;
+  sgHarvest.harvested = sgHarvest.harvested.plus(commonHarvestData.totalFarmHarvested); 
+  sgHarvest.compounded = sgHarvest.compounded.plus(commonHarvestData.toBadgerTree)
+  sgHarvest.performance = sgHarvest.performance.plus(commonHarvestData.governancePerformanceFee);
+  sgHarvest.strategist = sgHarvest.strategist.plus(commonHarvestData.strategistPerformanceFee);
+
   // TODO: need help on how to do this
-  sgHarvest.withdrawFee = ZERO;
-  sgHarvest.harvested = ZERO; 
-  sgHarvest.compounded = ZERO;
-  sgHarvest.performance = ZERO;
-  sgHarvest.strategist = ZERO;
+  sgHarvest.withdrawFee = ZERO;  
   sgHarvest.pricePerFullShare = ZERO;
   sgHarvest.totalSupply = ZERO;
   sgHarvest.balance = ZERO;
+  // TODO END
+
   sgHarvest.save();
 }
 
