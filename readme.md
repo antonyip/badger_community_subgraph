@@ -76,3 +76,22 @@ https://github.com/yearn/yearn-subgraph - 8e946556c7eddbbb22ebd060f5ccc6f504b85b
 - 1- no ported contracts.
 - 2- just 2 contracts turned on.
 - 3- nothing at all. shouldn't fail (no functions no contracts)
+
+### FarmHarvestExample - FarmHarvest
+- https://etherscan.io/tx/0x01351662598d1e8dcede81590e6de2c81efdd3e72829b5c9c21e0229e2738dbc#eventlog
+- totalFarmHarvested :12140554982521443801
+- farmToRewards :9712443986017155041
+- governancePerformanceFee :1214055498252144380
+- strategistPerformanceFee :1214055498252144380
+- timestamp :1608496137
+- blockNumber :11492395
+
+### SushiHarvestExample - HarvestState
+- https://etherscan.io/tx/0x63f82f4dca325e3e99b0ea16b81b7b36c831929e9832731efd8fd818370d1590#eventlog
+- xSushiHarvested :51590618723525859111
+- totalxSushi :166209435412238762114
+- toStrategist :16620943541223876211
+- toGovernance :16620943541223876211
+- toBadgerTree :132967548329791009692
+- timestamp :1624310799
+- blockNumber :12680032

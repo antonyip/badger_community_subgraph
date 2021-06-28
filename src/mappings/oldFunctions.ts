@@ -8,7 +8,7 @@ import { FarmHarvest } from '../../generated/harvestFarm/StrategyHarvestMetaFarm
 import { HarvestState } from '../../generated/harvestSushiWbtcEth/StrategySushiLpOptimizer';
 import { SgHarvest, SgTransfer, SgGeyser, SgStrategy } from '../../generated/schema';
 import { getEthNetwork } from '../utils/helpers/SG_network_helpers';
-import { BigDecimal, BigInt, Address} from '@graphprotocol/graph-ts';
+import { BigInt, Address} from '@graphprotocol/graph-ts';
 import { ZERO } from '../utils/constants';
 
 /////////////////// Geyser events handling ///////////////////////////// 
@@ -22,6 +22,7 @@ export function getOrCreateGeyser(add: Address) : SgGeyser {
     sgGeyser.netDeposit = ZERO;
     sgGeyser.grossDeposit = ZERO;
     sgGeyser.grossWithdraw = ZERO;
+    sgGeyser.save();
   }
   return sgGeyser as SgGeyser
 }
@@ -43,15 +44,15 @@ export function handleStaked(event: Staked): void {
   sgTransfer.to = event.transaction.to.toHexString();
   sgTransfer.sett = event.address.toHexString()
   sgTransfer.amount = event.transaction.value;
+  sgTransfer.sgGeyser = sgGeyser.id;
   sgTransfer.save();
 
   // update geyser
-  sgGeyser.deposits.push(sgTransfer.id);
-  sgGeyser.netDeposit.plus(event.params.amount);
-  sgGeyser.grossDeposit.plus(event.params.amount);
+  sgGeyser.transactions.push(stakeId);
+  sgGeyser.netDeposit = sgGeyser.netDeposit.plus(event.params.amount);
+  sgGeyser.grossDeposit = sgGeyser.grossDeposit.plus(event.params.amount);
   sgGeyser.save();
 }
-
 export function handleUnstaked(event: Unstaked): void {
   
   let unstakeId = event.address
@@ -70,12 +71,13 @@ export function handleUnstaked(event: Unstaked): void {
   sgTransfer.to = event.transaction.to.toHexString();
   sgTransfer.sett = event.address.toHexString()
   sgTransfer.amount = event.transaction.value;
+  sgTransfer.sgGeyser = sgGeyser.id;
   sgTransfer.save();
 
   // update geyser
-  sgGeyser.withdraws.push(sgTransfer.id);
-  sgGeyser.netDeposit.minus(event.params.amount);
-  sgGeyser.grossWithdraw.plus(event.params.amount);
+  sgGeyser.transactions.push(unstakeId);
+  sgGeyser.netDeposit = sgGeyser.netDeposit.minus(event.params.amount);
+  sgGeyser.grossWithdraw = sgGeyser.grossWithdraw.plus(event.params.amount);
   sgGeyser.save();
 }
 

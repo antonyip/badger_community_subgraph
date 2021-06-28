@@ -12,6 +12,8 @@ type SgTransfer @entity {
   from: String!
   to: String!
   amount: BigInt!
+  "Reverse lookup"
+  sgGeyser: SgGeyser
 }
 
 type SgHarvest @entity {
@@ -41,7 +43,7 @@ type SgStrategy @entity {
   network: SgNetwork
   sett: SgSett
   active: Boolean
-  harvests: [SgHarvest!]
+  harvests: [SgHarvest!] 
 }
 
 # type SgSettContract @entity {
@@ -61,10 +63,8 @@ type SgGeyser @entity {
   id: ID!
   "TODO: eth / bsc"
   network: SgNetwork
-  "staked"
-  deposits: [SgTransfer!]
-  "unstaked"
-  withdraws: [SgTransfer!]
+  "staked / unstaked"
+  transactions: [SgTransfer!] @derivedFrom(field: "sgGeyser")
   "Current Geyser deposit token value"
   netDeposit: BigInt!
   "Total sett deposit token value"

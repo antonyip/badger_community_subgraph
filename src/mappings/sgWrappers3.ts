@@ -1,8 +1,6 @@
-import { Transfer } from '../../generated/oBTC/BadgerSett';
-//import { sgGetOrCreateUser, sgGetOrCreateHarvest } from '../utils/helpers/SG_network_helpers';
-import { BIGINT_ZERO, GEYSERS, NORMALIZER, NO_ADDR } from '../utils/constants';
+import { GEYSERS, NORMALIZER, NO_ADDR } from '../utils/constants';
 import { handleSettDeposit, handleSettWithdraw, getOrCreateSett, getOrCreateSettBalance, getOrCreateUser } from "../utils/sett-util";
-import { BigDecimal, BigInt, Address} from '@graphprotocol/graph-ts';
+import {  BigInt, Address} from '@graphprotocol/graph-ts';
 
 function isValidUser(address: string): boolean {
   return address != NO_ADDR && !GEYSERS.includes(address);
