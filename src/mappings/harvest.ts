@@ -26,7 +26,7 @@ class CommonHarvestData {
   blockNumber :BigInt;
   // // TODO ADD
   // strategyAddress: Address;
-  // transactionID: string; // hash
+  // transactionID: string; // hash 
 }
 
 function handleCommonHarvestEvent(commonHarvestData: CommonHarvestData): void
@@ -35,10 +35,22 @@ function handleCommonHarvestEvent(commonHarvestData: CommonHarvestData): void
   if (sgHarvest == null)
   {
     sgHarvest = new SgHarvest(commonHarvestData.id);
+
+    sgHarvest.network = getCurrentNetwork();
+    sgHarvest.sett = commonHarvestData.settAddress;
+
+    sgHarvest.performanceFee = ZERO;
+    sgHarvest.strategistFee = ZERO;
+    sgHarvest.harvested = ZERO;
+    sgHarvest.compounded = ZERO;
+    sgHarvest.performance = ZERO;
+    sgHarvest.strategist = ZERO;
+    sgHarvest.withdrawFee = ZERO;  
+    sgHarvest.pricePerFullShare = ZERO;
+    sgHarvest.totalSupply = ZERO;
+    sgHarvest.balance = ZERO;
   }
 
-  sgHarvest.network = getCurrentNetwork();
-  sgHarvest.sett = commonHarvestData.settAddress;
   sgHarvest.performanceFee = commonHarvestData.governancePerformanceFee;
   sgHarvest.strategistFee = commonHarvestData.strategistPerformanceFee;
   sgHarvest.harvested = sgHarvest.harvested.plus(commonHarvestData.totalFarmHarvested); 
@@ -55,6 +67,8 @@ function handleCommonHarvestEvent(commonHarvestData: CommonHarvestData): void
 
   sgHarvest.save();
 }
+
+
 
 export function handleFarmHarvest(event: FarmHarvest): void {
 
