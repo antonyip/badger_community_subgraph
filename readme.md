@@ -38,9 +38,9 @@ https://thegraph.com/explorer/subgraph/antonyip/badger_community_subgraph
 - https://github.com/Badger-Finance/gitcoin/issues/4
 
 ### Other Project Commit hashes that I referenced
-https://github.com/Badger-Finance/badger-subgraph/tree/setts - 7222239bde5a6ad342b969070c4f6919db028d75
-https://github.com/axejintao/badger-dao - 45d94148c29de95146656d7c88bf938836085697
-https://github.com/yearn/yearn-subgraph - 8e946556c7eddbbb22ebd060f5ccc6f504b85bf1
+- https://github.com/Badger-Finance/badger-subgraph/tree/setts - 7222239bde5a6ad342b969070c4f6919db028d75
+- https://github.com/axejintao/badger-dao - 45d94148c29de95146656d7c88bf938836085697
+- https://github.com/yearn/yearn-subgraph - 8e946556c7eddbbb22ebd060f5ccc6f504b85bf1
 
 ### TODOS...
 - What to do with

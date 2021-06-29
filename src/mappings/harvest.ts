@@ -4,14 +4,6 @@ import { SgHarvest } from '../../generated/schema';
 import { getCurrentNetwork } from '../utils/helpers/network';
 import { BigInt, Address} from '@graphprotocol/graph-ts';
 import { ZERO ,BIGINT_ONE } from '../utils/constants';
-import { toDecimal } from '../utils/decimals';
-import {
-  getOrCreateHarvest,
-  getOrCreateStrategy,
-  getOrCreateToken,
-  getOrCreateTransaction,
-  getOrCreateVault,
-} from '../utils/helpers';
 
 /////////////////// Harvest events handling ///////////////////////////// 
 class CommonHarvestData {
@@ -66,6 +58,9 @@ function handleCommonHarvestEvent(commonHarvestData: CommonHarvestData): void
   // TODO END
 
   sgHarvest.save();
+
+  // TODO: put this code back from yYearn
+  // handleHarvest(event);
 }
 
 

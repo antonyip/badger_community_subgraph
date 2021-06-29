@@ -5,7 +5,7 @@ schema:
 #  base: QmYDmPk1briFEp66KZUKBm2iCDn7q3cgqvnYzLgqQxKmwX
 #  block: 12640000
 dataSources:
-  # ===== Tokens =====
+  # ===== Tokens ====
   - kind: ethereum/contract
     name: Badger
     network: mainnet
@@ -53,7 +53,7 @@ dataSources:
           handler: handleDiggTransfer
       file: ./src/mapping.ts
 
-  # ===== Setts =====
+  # ===== Setts ====
 
   - kind: ethereum/contract
     name: nativeBadgerSett
@@ -452,7 +452,7 @@ dataSources:
           handler: wrappedHandleShareTransfer
       file: ./src/mapping.ts
 
-  # ===== Newer Setts =====
+  # ===== Newer Setts ====
 
   - kind: ethereum/contract
     name: oBTC
@@ -634,7 +634,7 @@ dataSources:
           handler: wrappedHandleShareTransfer2
       file: ./src/mapping.ts
 
-  # ===== Geysers =====
+  # ===== Geysers ====
 
   - kind: ethereum/contract
     name: nativeBadgerGeyser
@@ -922,7 +922,7 @@ dataSources:
         - event: Unstaked(indexed address,uint256,uint256,indexed uint256,indexed uint256,bytes)
           handler: handleUnstaked
       file: ./src/mapping.ts
-  # ===== Farm Harvest =====
+  # ===== Farm Harvest ====
   - kind: ethereum/contract
     name: harvestFarm
     network: mainnet
@@ -1006,6 +1006,7 @@ dataSources:
         - event: HarvestState(uint256,uint256,uint256,uint256,uint256,uint256,uint256)
           handler: handleSushiHarvest
       file: ./src/mapping.ts
+
   - kind: ethereum/contract
     name: harvestSushiWbtcDigg
     network: mainnet
@@ -1027,7 +1028,7 @@ dataSources:
           handler: handleSushiHarvest
       file: ./src/mapping.ts
 
-  # ===== Wrappers =====
+  # ===== Wrappers ====
   - kind: ethereum/contract
     name: SimpleWrapperGatedUpgradeable
     network: mainnet
@@ -1062,7 +1063,7 @@ dataSources:
           handler: handleAffiliateShareTransfer
       file: ./src/mapping.ts
 
-# ===== Strategy Template =====
+# ===== Strategy Template ====
 templates:
   - name: Strategy
     kind: ethereum/contract

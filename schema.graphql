@@ -77,6 +77,7 @@ type SgGeyser @entity {
 type SgSett @entity {
   "address-network"
   id: ID!
+  "network"
   network: SgNetwork
   "Sett name"
   name: String!
@@ -110,21 +111,21 @@ type SgSettBalance @entity {
   id: ID!
   "address"
   user: SgUser!
-  "setttoken"
+  "which sett token is this balance for"
   sett: SgSett!
   "network"
   network: SgNetwork!
-  "Current sett deposit token value"
+  "Current user deposit token value"
   netDeposit: BigInt!
-  "Total sett deposit token value"
+  "Total user deposit token value"
   grossDeposit: BigInt!
-  "Total sett withdraw token value"
+  "Total user withdraw token value"
   grossWithdraw: BigInt!
-  "Current sett deposit share value"
+  "Current user deposit share value"
   netShareDeposit: BigInt!
-  "Total sett deposit share value"
+  "Total user deposit share value"
   grossShareDeposit: BigInt!
-  "Total sett withdraw share value"
+  "Total user withdraw share value"
   grossShareWithdraw: BigInt!
 }
 
