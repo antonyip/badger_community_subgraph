@@ -7,7 +7,7 @@ import {
  } from "../../generated/schema"
  import { BadgerSett } from "../../generated/oBTC/BadgerSett"
  import { ERC20 } from "../../generated/oBTC/ERC20"
- import { AffiliateVault } from "../generated/YFI-WBTC/AffiliateVault"
+ import { AffiliateVault } from "../../generated/YFI-WBTC/AffiliateVault"
  import { NO_ADDR, ZERO } from "./constants"
 import { getCurrentNetwork } from "./network"
 
