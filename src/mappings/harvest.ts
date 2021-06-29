@@ -3,7 +3,7 @@ import { Harvest } from '../../generated/nativeBadgerSett/Strategy'
 import { HarvestState } from '../../generated/harvestSushiWbtcEth/StrategySushiLpOptimizer';
 import { SgHarvest } from '../../generated/schema';
 import { getCurrentNetwork } from '../utils/helpers/network';
-import { BigInt } from '@graphprotocol/graph-ts';
+import { Address, BigInt } from '@graphprotocol/graph-ts';
 import { ZERO  } from '../utils/constants';
 import { handleHarvest } from './strategy'
 
@@ -62,7 +62,8 @@ function handleCommonHarvestEvent(commonHarvestData: CommonHarvestData): void
 function CreateEventFromFarmHarvest(event: FarmHarvest) : Harvest
 {
   let harvest = new Harvest()
-  harvest.address = event.address;
+  //harvest.address = Address.fromHexString(event.address.toHexString());
+  harvest.address = harvest.address
   harvest.transaction = event.transaction;
   harvest.transaction.hash = event.transaction.hash;
   harvest.block = event.block;
@@ -74,7 +75,8 @@ function CreateEventFromFarmHarvest(event: FarmHarvest) : Harvest
 function CreateEventFromSushiHarvest(event: HarvestState) : Harvest
 {
   let harvest = new Harvest()
-  harvest.address = event.address;
+  //harvest.address = Address.fromHexString(event.address.toHexString());
+  harvest.address = harvest.address
   harvest.transaction = event.transaction;
   harvest.transaction.hash = event.transaction.hash;
   harvest.block = event.block;
@@ -104,8 +106,16 @@ export function handleFarmHarvest(event: FarmHarvest): void {
   commonHarvestData.blockNumber = event.params.blockNumber;
   handleCommonHarvestEvent(commonHarvestData);
 
+  // TODO: fix error
+  // Subgraph instance failed to run: failed to process trigger: block #11394867 (0x9adc…ebbe), 
+  // transaction 13d7ea08f1141ea0cc080eca024d7adee6f4267da6cf400ca9e6e33c759e1f7f: 
+  // Could not find ABI for contract "V1Contract", try adding it to the 'abis' section of the subgraph manifest wasm backtrace: 
+  // 0: 0x1c4c - <unknown>!~lib/@graphprotocol/graph-ts/chain/ethereum/ethereum.SmartContract#call 
+  // 1: 0x24ee - <unknown>!src/utils/helpers/yVault/yVault/getOrCreateVault 
+  // 2: 0x3c69 - <unknown>!src/mappings/strategy/handleHarvest 
+  // 3: 0x46cd - <unknown>!src/mappings/harvest/handleFarmHarvest , code: SubgraphSyncingFailure
   // Original Harvest Event from yVault
-  handleHarvest(CreateEventFromFarmHarvest(event));
+   handleHarvest(CreateEventFromFarmHarvest(event));
 }
 
 export function handleSushiHarvest(event: HarvestState): void {

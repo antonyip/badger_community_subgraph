@@ -967,6 +967,12 @@ dataSources:
       abis:
         - name: StrategyHarvestMetaFarm
           file: ./abis/StrategyHarvestMetaFarm.json
+        - name: Strategy
+          file: ./abis/Strategy.json
+        - name: V1Contract
+          file: ./abis/V1Contract.json
+        - name: Controller
+          file: ./abis/Controller.json
       eventHandlers:
         - event: FarmHarvest(uint256,uint256,uint256,uint256,uint256,uint256)
           handler: handleFarmHarvest
@@ -988,6 +994,12 @@ dataSources:
       abis:
         - name: StrategySushiBadgerWbtc
           file: ./abis/StrategySushiBadgerWbtc.json
+        - name: Strategy
+          file: ./abis/Strategy.json
+        - name: V1Contract
+          file: ./abis/V1Contract.json
+        - name: Controller
+          file: ./abis/Controller.json
       eventHandlers:
         - event: HarvestState(uint256,uint256,uint256,uint256,uint256,uint256,uint256)
           handler: handleSushiHarvest
@@ -1009,6 +1021,12 @@ dataSources:
       abis:
         - name: StrategySushiLpOptimizer
           file: ./abis/StrategySushiLpOptimizer.json
+        - name: Strategy
+          file: ./abis/Strategy.json
+        - name: V1Contract
+          file: ./abis/V1Contract.json
+        - name: Controller
+          file: ./abis/Controller.json
       eventHandlers:
         - event: HarvestState(uint256,uint256,uint256,uint256,uint256,uint256,uint256)
           handler: handleSushiHarvest
@@ -1030,6 +1048,12 @@ dataSources:
       abis:
         - name: StrategySushiLpOptimizer
           file: ./abis/StrategySushiLpOptimizer.json
+        - name: Strategy
+          file: ./abis/Strategy.json
+        - name: V1Contract
+          file: ./abis/V1Contract.json
+        - name: Controller
+          file: ./abis/Controller.json
       eventHandlers:
         - event: HarvestState(uint256,uint256,uint256,uint256,uint256,uint256,uint256)
           handler: handleSushiHarvest
@@ -1051,6 +1075,12 @@ dataSources:
       abis:
         - name: StrategySushiDiggWbtcLpOptimizer
           file: ./abis/StrategySushiDiggWbtcLpOptimizer.json
+        - name: Strategy
+          file: ./abis/Strategy.json
+        - name: V1Contract
+          file: ./abis/V1Contract.json
+        - name: Controller
+          file: ./abis/Controller.json
       eventHandlers:
         - event: HarvestState(uint256,uint256,uint256,uint256,uint256,uint256,uint256)
           handler: handleSushiHarvest
