@@ -1,4 +1,5 @@
-import { Transfer } from '../../generated/oBTC/BadgerSett';
+import { handleShareTransfer } from './yVault';
+import { Transfer  } from '../../generated/nativeBadgerSett/V1Contract';
 import { settLogic } from './sett';
 
 export function wrappedHandleShareTransfer2(event: Transfer): void {
@@ -8,6 +9,5 @@ export function wrappedHandleShareTransfer2(event: Transfer): void {
 
   // this function is the original yVault Function
   // so that people used to the old system can still use it.
-  // TODO: enable this back
-  //handleShareTransfer(event);
+  handleShareTransfer(event);
 }

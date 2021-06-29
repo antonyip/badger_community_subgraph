@@ -1,14 +1,13 @@
-import { FarmHarvest, Harvest } from '../../generated/harvestFarm/StrategyHarvestMetaFarm';
+import { FarmHarvest } from '../../generated/harvestFarm/StrategyHarvestMetaFarm';
 import { HarvestState } from '../../generated/harvestSushiWbtcEth/StrategySushiLpOptimizer';
-import { SgHarvest } from '../../generated/schema';
+import { SgHarvest, SgStrategy, SgTransfer } from '../../generated/schema';
 import { getCurrentNetwork } from '../utils/helpers/network';
 import { BigInt } from '@graphprotocol/graph-ts';
 import { ZERO  } from '../utils/constants';
-import { handleHarvest } from './strategy'
 
 /////////////////// Harvest events handling ///////////////////////////// 
 class CommonHarvestData {
-  id: string;
+  harvestid: string;
   settAddress: string;
   totalFarmHarvested :BigInt;
   farmToRewards :BigInt;
@@ -17,14 +16,31 @@ class CommonHarvestData {
   toBadgerTree: BigInt; // not sure what this is.. TODO: ask
   timestamp :BigInt;
   blockNumber :BigInt;
+
+  strategyid: string;
+}
+
+function getOrCreateStrategy(strategyid: string) : SgStrategy
+{
+  let sgStrategy = SgStrategy.load(strategyid);
+  if (sgStrategy == null)
+  {
+    sgStrategy = new SgStrategy(strategyid);
+    sgStrategy.network = getCurrentNetwork();
+    sgStrategy.sett = strategyid;
+    sgStrategy.active = true;
+  }
+  return sgStrategy as SgStrategy;
 }
 
 function handleCommonHarvestEvent(commonHarvestData: CommonHarvestData): void
 {
-  let sgHarvest = SgHarvest.load(commonHarvestData.id)
+  let sgStrategy = getOrCreateStrategy(commonHarvestData.strategyid);
+  
+  let sgHarvest = SgHarvest.load(commonHarvestData.harvestid)
   if (sgHarvest == null)
   {
-    sgHarvest = new SgHarvest(commonHarvestData.id);
+    sgHarvest = new SgHarvest(commonHarvestData.harvestid);
 
     sgHarvest.network = getCurrentNetwork();
     sgHarvest.sett = commonHarvestData.settAddress;
@@ -35,6 +51,7 @@ function handleCommonHarvestEvent(commonHarvestData: CommonHarvestData): void
     sgHarvest.compounded = ZERO;
     sgHarvest.performance = ZERO;
     sgHarvest.strategist = ZERO;
+    
     sgHarvest.withdrawFee = ZERO;  
     sgHarvest.pricePerFullShare = ZERO;
     sgHarvest.totalSupply = ZERO;
@@ -56,6 +73,10 @@ function handleCommonHarvestEvent(commonHarvestData: CommonHarvestData): void
   // TODO END
 
   sgHarvest.save();
+
+  sgStrategy.harvests.push(sgHarvest.id);
+  sgStrategy.save();
+  
 }
 
 export function handleFarmHarvest(event: FarmHarvest): void {
@@ -68,7 +89,7 @@ export function handleFarmHarvest(event: FarmHarvest): void {
   .concat(event.logIndex.toString());
 
   let commonHarvestData = new CommonHarvestData()
-  commonHarvestData.id = harvestID;
+  commonHarvestData.harvestid = harvestID;
   commonHarvestData.settAddress = event.address.toHexString();
   commonHarvestData.totalFarmHarvested = event.params.totalFarmHarvested;
   commonHarvestData.farmToRewards = event.params.farmToRewards;
@@ -77,10 +98,10 @@ export function handleFarmHarvest(event: FarmHarvest): void {
   commonHarvestData.toBadgerTree = ZERO;
   commonHarvestData.timestamp = event.params.timestamp;
   commonHarvestData.blockNumber = event.params.blockNumber;
-  handleCommonHarvestEvent(commonHarvestData);
 
-  // Original Harvest Event from yVault
-  handleHarvest(event as unknown as Harvest);
+  commonHarvestData.strategyid = event.address.toHexString().concat("-").concat(getCurrentNetwork());
+
+  handleCommonHarvestEvent(commonHarvestData);
 }
 
 export function handleSushiHarvest(event: HarvestState): void {
@@ -93,7 +114,7 @@ export function handleSushiHarvest(event: HarvestState): void {
     .concat(event.logIndex.toString());
 
   let commonHarvestData = new CommonHarvestData()
-  commonHarvestData.id = sushiHarvestID;
+  commonHarvestData.harvestid = sushiHarvestID;
   commonHarvestData.settAddress = event.address.toHexString();
   commonHarvestData.totalFarmHarvested = event.params.xSushiHarvested;
   commonHarvestData.farmToRewards = event.params.totalxSushi;
@@ -102,9 +123,9 @@ export function handleSushiHarvest(event: HarvestState): void {
   commonHarvestData.toBadgerTree = event.params.toBadgerTree;
   commonHarvestData.timestamp = event.params.timestamp;
   commonHarvestData.blockNumber = event.params.blockNumber;
-  handleCommonHarvestEvent(commonHarvestData);
 
-  // Original Harvest Event from yVault
-  handleHarvest(event as unknown as Harvest);
+  commonHarvestData.strategyid = event.address.toHexString().concat("-").concat(getCurrentNetwork());
+
+  handleCommonHarvestEvent(commonHarvestData);
 }
 
