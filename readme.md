@@ -92,18 +92,17 @@ https://thegraph.com/explorer/subgraph/antonyip/badger_community_subgraph
     - first harvest to be triggered.
 	- 0x13d7ea08f1141ea0cc080eca024d7adee6f4267da6cf400ca9e6e33c759e1f7f	Harvest	11394867	204 days 18 hrs ago	Badger: Keeper	 IN 	0xaae82e3c89e15e6f26f60724f115d5012363e030	0 Ether	0.0047426
 - 3 all contracts (no harvest | settLogic | geyser) (success)
-
-### try 2
-- 2 all contracts (all logic)
-
-### June 28 2021
-- 4 (yVault harvest added back)
-- 5 reconfigured apis for BadgerSetts back to yVault
 - 6 Turned SettHooks on for new BadgerSetts (failed due to harvests not compat)
 
-- 6 implemented SgStrategy and took out harvestHooks (mergeCandidate Branch)
-- 1 
-- 3
+### June 29 2021
+- 1 turn on smart contract queries (all setts) (Failed - Contracts not interchangable)
+- 2 all contracts (all logic)
+- 3 turn on smart contract queries (new setts) (Failed - Contracts not interchangable)
+- 4 yVault harvest added back (Failed - SushiHarvest != yHarvest)
+- 5 reconfigured apis for BadgerSetts back to yVault (Failed - SushiHarvest != yHarvest)
+- 6 implemented SgStrategy and took out harvestHooks (MergeCandidate Branch)
+
+- 1 Change all Setts to use BadgerSett abi
 
 ### FarmHarvestExample - FarmHarvest
 - https://etherscan.io/tx/0x01351662598d1e8dcede81590e6de2c81efdd3e72829b5c9c21e0229e2738dbc#eventlog

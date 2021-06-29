@@ -40,7 +40,7 @@ export function getOrCreateUser(address: Address): SgUser {
 
 export function getOrCreateSett(address: Address): SgSett {
   let sett = SgSett.load(address.toHexString());
-  let contract = BadgerSett.bind(address);
+  
 
   if (sett == null) {
     sett = new SgSett(address.toHexString());
@@ -58,17 +58,9 @@ export function getOrCreateSett(address: Address): SgSett {
     sett.grossShareDeposit = ZERO;
     sett.grossShareWithdraw = ZERO;
   }
-  // TODO: Removed due to theGraph Error
-  // Subgraph instance failed to run: failed to process trigger: block #11381150 (0xb10b…2059),
-  // transaction 35bcc1682da40130f91e3a9926679ae75991f0e3a23c3b76107ca2d30e9805f8: Could not find ABI for contract "BadgerSett",
-  // try adding it to the 'abis' section of the subgraph manifest wasm backtrace: 
-  //0: 0x14eb - <unknown>!~lib/@graphprotocol/graph-ts/chain/ethereum/ethereum.SmartContract#tryCall 
-  //1: 0x1611 - <unknown>!generated/oBTC/BadgerSett/BadgerSett#try_name 
-  //2: 0x1bb2 - <unknown>!src/utils/sett-util/getOrCreateSett 
-  //3: 0x1f13 - <unknown>!src/mappings/sgWrappers3/settLogic 
-  //4: 0x3673 - <unknown>!src/mappings/sgWrappers/wrappedHandleShareTransfer , 
-  //code: SubgraphSyncingFailure
 
+  let contract = BadgerSett.bind(address);
+  /*
   let name = contract.try_name();
   let symbol = contract.try_symbol();
   let token = contract.try_token();
@@ -81,6 +73,7 @@ export function getOrCreateSett(address: Address): SgSett {
   sett.pricePerFullShare = !pricePerFullShare.reverted ? pricePerFullShare.value : sett.pricePerFullShare;
   sett.balance = !balance.reverted ? balance.value : sett.balance;
   sett.totalSupply = !totalSupply.reverted ? totalSupply.value : sett.totalSupply;
+  */
 
   return sett as SgSett;
 }
