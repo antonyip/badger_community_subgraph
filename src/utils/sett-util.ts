@@ -68,7 +68,7 @@ export function getOrCreateSett(address: Address): SgSett {
   //3: 0x1f13 - <unknown>!src/mappings/sgWrappers3/settLogic 
   //4: 0x3673 - <unknown>!src/mappings/sgWrappers/wrappedHandleShareTransfer , 
   //code: SubgraphSyncingFailure
-/*
+
   let name = contract.try_name();
   let symbol = contract.try_symbol();
   let token = contract.try_token();
@@ -81,7 +81,7 @@ export function getOrCreateSett(address: Address): SgSett {
   sett.pricePerFullShare = !pricePerFullShare.reverted ? pricePerFullShare.value : sett.pricePerFullShare;
   sett.balance = !balance.reverted ? balance.value : sett.balance;
   sett.totalSupply = !totalSupply.reverted ? totalSupply.value : sett.totalSupply;
-*/
+
   return sett as SgSett;
 }
 

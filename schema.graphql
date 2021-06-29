@@ -64,7 +64,7 @@ type SgStrategy @entity {
 type SgGeyser @entity {
   "address-network"
   id: ID!
-  "TODO: eth / bsc"
+  "eth / bsc"
   network: SgNetwork
   "staked / unstaked"
   transactions: [SgTransfer!] @derivedFrom(field: "sgGeyser")
