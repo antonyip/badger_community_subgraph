@@ -44,11 +44,11 @@ type SgStrategy @entity {
   sett: SgSett
   "active"
   active: Boolean
-  "total strategy performance fee collected"
+  "strategy performance fee"
   performanceFee: BigInt!
-  "total strategy strategist fee collected"
+  "strategy strategist fee"
   strategyFee: BigInt!
-  "current Withdraw Fee"
+  "strategy withdrawal Fee"
   withdrawFee: BigInt!
   "List of Harvests"
   harvests: [SgHarvest!] @derivedFrom(field: "sgStrategy")
