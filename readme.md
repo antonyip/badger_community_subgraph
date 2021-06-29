@@ -102,7 +102,9 @@ https://thegraph.com/explorer/subgraph/antonyip/badger_community_subgraph
 - 5 reconfigured apis for BadgerSetts back to yVault (Failed - SushiHarvest != yHarvest)
 - 6 implemented SgStrategy and took out harvestHooks (MergeCandidate Branch)
 
-- 1 Change all Setts to use BadgerSett abi (with database logic)
+- 1 Change all Setts to use BadgerSett abi (with database logic) (failed - wrong "Transfer" configured)
+
+- 1 Change all Setts to use BadgerSett abi (with database logic) + removed yearn
 - 2 all contracts (all logic)
 - 3 Change all Setts to use BadgerSett abi (no logic)
 - 4
