@@ -32,8 +32,11 @@ type SgHarvest @entity {
   performance: BigInt!
   "total token strategist fee"
   strategist: BigInt!
+  "current price Per Full Share"
   pricePerFullShare: BigInt!
+  "total Supply"
   totalSupply: BigInt!
+  "balance"
   balance: BigInt!
 }
 
@@ -43,7 +46,7 @@ type SgStrategy @entity {
   network: SgNetwork
   sett: SgSett
   active: Boolean
-  harvests: [SgHarvest!] 
+  harvests: [SgHarvest!]
 }
 
 # type SgSettContract @entity {
