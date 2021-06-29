@@ -1,4 +1,5 @@
-import { FarmHarvest, Harvest } from '../../generated/harvestFarm/StrategyHarvestMetaFarm';
+import { FarmHarvest } from '../../generated/harvestFarm/StrategyHarvestMetaFarm';
+import { Harvest } from '../../generated/nativeBadgerSett/Strategy'
 import { HarvestState } from '../../generated/harvestSushiWbtcEth/StrategySushiLpOptimizer';
 import { SgHarvest } from '../../generated/schema';
 import { getCurrentNetwork } from '../utils/helpers/network';
@@ -58,6 +59,30 @@ function handleCommonHarvestEvent(commonHarvestData: CommonHarvestData): void
   sgHarvest.save();
 }
 
+function CreateEventFromFarmHarvest(event: FarmHarvest) : Harvest
+{
+  let harvest = new Harvest()
+  harvest.address = event.address;
+  harvest.transaction = event.transaction;
+  harvest.transaction.hash = event.transaction.hash;
+  harvest.block = event.block;
+  harvest.block.timestamp = event.block.timestamp;
+  harvest.block.number = event.block.number;
+  return harvest;
+}
+
+function CreateEventFromSushiHarvest(event: HarvestState) : Harvest
+{
+  let harvest = new Harvest()
+  harvest.address = event.address;
+  harvest.transaction = event.transaction;
+  harvest.transaction.hash = event.transaction.hash;
+  harvest.block = event.block;
+  harvest.block.timestamp = event.block.timestamp;
+  harvest.block.number = event.block.number;
+  return harvest;
+}
+
 export function handleFarmHarvest(event: FarmHarvest): void {
 
   let harvestID = event.address
@@ -80,7 +105,7 @@ export function handleFarmHarvest(event: FarmHarvest): void {
   handleCommonHarvestEvent(commonHarvestData);
 
   // Original Harvest Event from yVault
-  handleHarvest(event as unknown as Harvest);
+  handleHarvest(CreateEventFromFarmHarvest(event));
 }
 
 export function handleSushiHarvest(event: HarvestState): void {
@@ -105,6 +130,6 @@ export function handleSushiHarvest(event: HarvestState): void {
   handleCommonHarvestEvent(commonHarvestData);
 
   // Original Harvest Event from yVault
-  handleHarvest(event as unknown as Harvest);
+  handleHarvest(CreateEventFromSushiHarvest(event));
 }
 
