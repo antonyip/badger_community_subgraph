@@ -73,5 +73,5 @@
 - 2 
 - 3 Change all Setts to use BadgerSett abi (no logic)
 - 4 Change all Setts to use BadgerSett abi (with database logic) + removed yearn + refactor sett
-- 5
+- 5 Change all Setts to use BadgerSett abi (with database logic) + removed yearn + refactor sett + fix reverse lookup on SgStrategy
 - 6 implemented SgStrategy and took out harvestHooks (MergeCandidate Branch)

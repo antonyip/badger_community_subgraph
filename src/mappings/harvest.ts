@@ -17,7 +17,7 @@ class CommonHarvestData {
   timestamp :BigInt;
   blockNumber :BigInt;
 
-  strategyid: string;
+  strategyid: string; // address of the Strategy
 }
 
 function getOrCreateStrategy(strategyid: string) : SgStrategy
@@ -64,6 +64,7 @@ function handleCommonHarvestEvent(commonHarvestData: CommonHarvestData): void
   sgHarvest.compounded = sgHarvest.compounded.plus(commonHarvestData.toBadgerTree)
   sgHarvest.performance = sgHarvest.performance.plus(commonHarvestData.governancePerformanceFee);
   sgHarvest.strategist = sgHarvest.strategist.plus(commonHarvestData.strategistPerformanceFee);
+  
 
   // TODO: need help on how to do this
   sgHarvest.withdrawFee = ZERO;  
@@ -71,6 +72,9 @@ function handleCommonHarvestEvent(commonHarvestData: CommonHarvestData): void
   sgHarvest.totalSupply = ZERO;
   sgHarvest.balance = ZERO;
   // TODO END
+
+  // reverse lookup storage
+  sgHarvest.sgStrategy = sgStrategy.id;
 
   sgHarvest.save();
 
@@ -99,7 +103,7 @@ export function handleFarmHarvest(event: FarmHarvest): void {
   commonHarvestData.timestamp = event.params.timestamp;
   commonHarvestData.blockNumber = event.params.blockNumber;
 
-  commonHarvestData.strategyid = event.address.toHexString().concat("-").concat(getCurrentNetwork());
+  commonHarvestData.strategyid = event.address.toHexString()
 
   handleCommonHarvestEvent(commonHarvestData);
 }
@@ -124,7 +128,7 @@ export function handleSushiHarvest(event: HarvestState): void {
   commonHarvestData.timestamp = event.params.timestamp;
   commonHarvestData.blockNumber = event.params.blockNumber;
 
-  commonHarvestData.strategyid = event.address.toHexString().concat("-").concat(getCurrentNetwork());
+  commonHarvestData.strategyid = event.address.toHexString()
 
   handleCommonHarvestEvent(commonHarvestData);
 }

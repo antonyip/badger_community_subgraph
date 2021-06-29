@@ -38,6 +38,8 @@ type SgHarvest @entity {
   totalSupply: BigInt!
   "balance"
   balance: BigInt!
+  "Reverse lookup"
+  sgStrategy: SgStrategy
 }
 
 type SgStrategy @entity {
@@ -46,7 +48,7 @@ type SgStrategy @entity {
   network: SgNetwork
   sett: SgSett
   active: Boolean
-  harvests: [SgHarvest!]
+  harvests: [SgHarvest!] @derivedFrom(field: "sgStrategy")
 }
 
 # type SgSettContract @entity {
@@ -143,6 +145,7 @@ type SgUser @entity {
   balances: [SgSettBalance!] @derivedFrom(field: "user")
 }
 
+# Ported from - yVault@Token
 type Token @entity {
   id: ID!
   address: Bytes!
