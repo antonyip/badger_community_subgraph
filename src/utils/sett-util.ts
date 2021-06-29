@@ -7,9 +7,9 @@ import {
  } from "../../generated/schema"
  import { BadgerSett } from "../../generated/oBTC/BadgerSett"
  import { ERC20 } from "../../generated/oBTC/ERC20"
- //import { AffiliateVault } from "../generated/YFI-WBTC/AffiliateVault"
+ import { AffiliateVault } from "../generated/YFI-WBTC/AffiliateVault"
  import { NO_ADDR, ZERO } from "./constants"
-import { getCurrentNetwork } from "./helpers/network"
+import { getCurrentNetwork } from "./network"
 
 export function handleSettWithdraw(userBalance: SgSettBalance, share: BigInt, token: BigInt): void {
   userBalance.netDeposit = userBalance.netDeposit.minus(token);
@@ -119,13 +119,13 @@ export function getOrCreateToken(address: Address): Token {
   return token as Token;
 };
 
-/*
-export function getOrCreateAffiliateSett(address: Address): Sett {
-  let sett = Sett.load(address.toHexString());
+
+export function getOrCreateAffiliateSett(address: Address): SgSett {
+  let sett = SgSett.load(address.toHexString());
   let contract = AffiliateVault.bind(address);
 
   if (sett == null) {
-    sett = new Sett(address.toHexString());
+    sett = new SgSett(address.toHexString());
     sett.name = "";
     sett.symbol = "";
     sett.token = "";
@@ -153,6 +153,5 @@ export function getOrCreateAffiliateSett(address: Address): Sett {
   sett.balance = !balance.reverted ? balance.value : sett.balance;
   sett.totalSupply = !totalSupply.reverted ? totalSupply.value : sett.totalSupply;
 
-  return sett as Sett;
+  return sett as SgSett;
 }
-*/

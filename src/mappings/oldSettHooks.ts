@@ -1,5 +1,4 @@
-import { handleShareTransfer } from './yVault';
-import { Transfer } from '../../generated/nativeBadgerSett/V1Contract';
+import { Transfer } from '../../generated/oBTC/BadgerSett';
 import { settLogic } from './sett';
 
 

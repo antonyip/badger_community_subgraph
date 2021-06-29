@@ -1009,11 +1009,11 @@ dataSources:
 
   # ===== Wrappers ====
   - kind: ethereum/contract
-    name: SimpleWrapperGatedUpgradeable
+    name: YFI-WBTC
     network: mainnet
     source:
       address: "0x4b92d19c11435614CD49Af1b589001b7c08cD4D5"
-      abi: SimpleWrapperGatedUpgradeable
+      abi: AffiliateVault
       startBlock: 12246700
     mapping:
       kind: ethereum/events
@@ -1029,47 +1029,13 @@ dataSources:
         - Account
         - Token
       abis:
-        - name: SimpleWrapperGatedUpgradeable
-          file: ./abis/SimpleWrapperGatedUpgradeable.json
-        - name: Controller
-          file: ./abis/Controller.json
-        - name: Strategy
-          file: ./abis/Strategy.json
+        - name: AffiliateVault
+          file: ./abis/AffiliateVault.json
         - name: ERC20
           file: ./abis/ERC20.json
+        - name: BadgerSett
+          file: ./abis/BadgerSett.json
       eventHandlers:
         - event: Transfer(indexed address,indexed address,uint256)
           handler: handleAffiliateShareTransfer
       file: ./src/mapping.ts
-
-# ===== Strategy Template ====
-templates:
-  - name: Strategy
-    kind: ethereum/contract
-    network: mainnet
-    source:
-      abi: Strategy
-    mapping:
-      kind: ethereum/events
-      apiVersion: 0.0.4
-      language: wasm/assemblyscript
-      file: ./src/mapping.ts
-      entities:
-        - Vault
-        - Deposit
-        - Withdraw
-        - Harvest
-        - Transfer
-        - AccountVaultBalance
-        - Account
-        - Token
-      abis:
-        - name: Strategy
-          file: ./abis/Strategy.json
-        - name: V1Contract
-          file: ./abis/V1Contract.json
-        - name: Controller
-          file: ./abis/Controller.json
-      eventHandlers:
-        - event: Harvest(uint256,indexed uint256)
-          handler: handleHarvest

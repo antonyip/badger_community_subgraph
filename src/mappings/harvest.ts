@@ -1,7 +1,7 @@
 import { FarmHarvest } from '../../generated/harvestFarm/StrategyHarvestMetaFarm';
 import { HarvestState } from '../../generated/harvestSushiWbtcEth/StrategySushiLpOptimizer';
 import { SgHarvest, SgStrategy, SgTransfer } from '../../generated/schema';
-import { getCurrentNetwork } from '../utils/helpers/network';
+import { getCurrentNetwork } from '../utils/network';
 import { BigInt } from '@graphprotocol/graph-ts';
 import { ZERO  } from '../utils/constants';
 
