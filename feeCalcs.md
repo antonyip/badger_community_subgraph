@@ -1,3 +1,4 @@
+-- https://duneanalytics.com/queries/63663
 --CREATE OR REPLACE VIEW dune_user_generated.badgerdao_income_statement_daily AS (
 WITH days AS (
   SELECT date_trunc('day', time) as day 

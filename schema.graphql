@@ -158,3 +158,10 @@ type Token @entity {
   "Additional Data needed for BadgerDao"
   totalSupply: BigInt
 }
+
+type BadgerDAODailyIncomeEvent @entity {
+  id: ID!
+  timestamp: BigInt!
+  amount: BigInt!
+  token: String!
+}
