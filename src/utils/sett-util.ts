@@ -60,7 +60,7 @@ export function getOrCreateSett(address: Address): SgSett {
   }
 
   let contract = BadgerSett.bind(address);
-  /*
+  
   let name = contract.try_name();
   let symbol = contract.try_symbol();
   let token = contract.try_token();
@@ -73,7 +73,7 @@ export function getOrCreateSett(address: Address): SgSett {
   sett.pricePerFullShare = !pricePerFullShare.reverted ? pricePerFullShare.value : sett.pricePerFullShare;
   sett.balance = !balance.reverted ? balance.value : sett.balance;
   sett.totalSupply = !totalSupply.reverted ? totalSupply.value : sett.totalSupply;
-  */
+  
 
   return sett as SgSett;
 }
