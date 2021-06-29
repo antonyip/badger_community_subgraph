@@ -1,9 +1,10 @@
-import { FarmHarvest } from '../../generated/harvestFarm/StrategyHarvestMetaFarm';
+import { FarmHarvest, Harvest } from '../../generated/harvestFarm/StrategyHarvestMetaFarm';
 import { HarvestState } from '../../generated/harvestSushiWbtcEth/StrategySushiLpOptimizer';
 import { SgHarvest } from '../../generated/schema';
 import { getCurrentNetwork } from '../utils/helpers/network';
-import { BigInt, Address} from '@graphprotocol/graph-ts';
-import { ZERO ,BIGINT_ONE } from '../utils/constants';
+import { BigInt } from '@graphprotocol/graph-ts';
+import { ZERO  } from '../utils/constants';
+import { handleHarvest } from './strategy'
 
 /////////////////// Harvest events handling ///////////////////////////// 
 class CommonHarvestData {
@@ -16,9 +17,6 @@ class CommonHarvestData {
   toBadgerTree: BigInt; // not sure what this is.. TODO: ask
   timestamp :BigInt;
   blockNumber :BigInt;
-  // // TODO ADD
-  // strategyAddress: Address;
-  // transactionID: string; // hash 
 }
 
 function handleCommonHarvestEvent(commonHarvestData: CommonHarvestData): void
@@ -58,12 +56,7 @@ function handleCommonHarvestEvent(commonHarvestData: CommonHarvestData): void
   // TODO END
 
   sgHarvest.save();
-
-  // TODO: put this code back from yYearn
-  // handleHarvest(event);
 }
-
-
 
 export function handleFarmHarvest(event: FarmHarvest): void {
 
@@ -85,6 +78,9 @@ export function handleFarmHarvest(event: FarmHarvest): void {
   commonHarvestData.timestamp = event.params.timestamp;
   commonHarvestData.blockNumber = event.params.blockNumber;
   handleCommonHarvestEvent(commonHarvestData);
+
+  // Original Harvest Event from yVault
+  handleHarvest(event as unknown as Harvest);
 }
 
 export function handleSushiHarvest(event: HarvestState): void {
@@ -107,4 +103,8 @@ export function handleSushiHarvest(event: HarvestState): void {
   commonHarvestData.timestamp = event.params.timestamp;
   commonHarvestData.blockNumber = event.params.blockNumber;
   handleCommonHarvestEvent(commonHarvestData);
+
+  // Original Harvest Event from yVault
+  handleHarvest(event as unknown as Harvest);
 }
+

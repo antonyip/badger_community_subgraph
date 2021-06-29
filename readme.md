@@ -92,6 +92,7 @@ https://thegraph.com/explorer/subgraph/antonyip/badger_community_subgraph
 - 2 all contracts (all logic)
 
 ### June 28 2021
+- 3 (yVault harvest added back) (todo)
 
 ### FarmHarvestExample - FarmHarvest
 - https://etherscan.io/tx/0x01351662598d1e8dcede81590e6de2c81efdd3e72829b5c9c21e0229e2738dbc#eventlog
