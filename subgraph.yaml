@@ -1036,6 +1036,16 @@ dataSources:
         - name: BadgerSett
           file: ./abis/BadgerSett.json
       eventHandlers:
+        - event: Burn(indexed address,uint256)
+          handler: handleBurn
+        - event: Deposit(indexed address,uint256)
+          handler: handleDeposit
+        - event: Mint(indexed address,uint256)
+          handler: handleMint
         - event: Transfer(indexed address,indexed address,uint256)
-          handler: handleAffiliateShareTransfer
-      file: ./src/mapping.ts
+          handler: handleTransfer
+        - event: UpdateGuestList(address)
+          handler: handleUpdateGuestList
+        - event: Withdraw(indexed address,uint256)
+          handler: handleWithdraw
+      file: ./src/yearn-affiliate.ts
