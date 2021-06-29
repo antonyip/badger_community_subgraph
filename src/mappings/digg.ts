@@ -2,7 +2,7 @@ import { Address } from '@graphprotocol/graph-ts';
 
 import { Transfer, UFragments } from '../../generated/Digg/UFragments';
 import { SgTransfer } from '../../generated/schema'
-import { getCurrentNetwork } from '../utils/helpers/network'
+import { getCurrentNetwork } from '../utils/network'
 import { getOrCreateUser } from '../utils/sett-util';
 
 export function handleDiggTransfer(event: Transfer): void {

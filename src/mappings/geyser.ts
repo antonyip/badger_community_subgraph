@@ -5,7 +5,7 @@ import {
   } from '../../generated/nativeBadgerGeyser/BadgerGeyser';
 
 import { SgTransfer, SgGeyser } from '../../generated/schema';
-import { getCurrentNetwork } from '../utils/helpers/network';
+import { getCurrentNetwork } from '../utils/network';
 import { Address} from '@graphprotocol/graph-ts';
 import { ZERO } from '../utils/constants';
 

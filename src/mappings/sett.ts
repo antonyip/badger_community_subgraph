@@ -2,6 +2,8 @@ import { GEYSERS, NORMALIZER, NO_ADDR } from '../utils/constants';
 import { handleSettDeposit, handleSettWithdraw, getOrCreateSett, getOrCreateSettBalance, getOrCreateUser } from "../utils/sett-util";
 import {  BigInt, Address} from '@graphprotocol/graph-ts';
 
+import { Transfer } from '../../generated/oBTC/BadgerSett';
+
 function isValidUser(address: string): boolean {
   return address != NO_ADDR && !GEYSERS.includes(address);
 }
@@ -56,4 +58,8 @@ export function settLogic(
   to.save();
   from.save();
   sett.save();
+}
+
+export function handleSett(event: Transfer): void {
+  settLogic(event.address, event.params.from, event.params.to, event.params.value);
 }

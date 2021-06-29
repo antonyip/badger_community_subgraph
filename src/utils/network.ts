@@ -1,4 +1,4 @@
-import { SgNetwork, } from '../../../generated/schema';
+import { SgNetwork, } from '../../generated/schema';
 
 // TODO: work on the automatic network getter
 
