@@ -19,25 +19,18 @@ type SgTransfer @entity {
 type SgHarvest @entity {
   "hash"
   id: ID!
+  "network"
   network: SgNetwork
+  "Token Address"
   sett: SgSett
+  "performance fee for this harvest"
   performanceFee: BigInt!
-  strategistFee: BigInt!
-  withdrawFee: BigInt!
+  "strategy fee for this harvest"
+  strategyFee: BigInt!
   "total token claimed"
   harvested: BigInt!
   "total token reinvested"
   compounded: BigInt!
-  "total token performance fee"
-  performance: BigInt!
-  "total token strategist fee"
-  strategist: BigInt!
-  "current price Per Full Share"
-  pricePerFullShare: BigInt!
-  "total Supply"
-  totalSupply: BigInt!
-  "balance"
-  balance: BigInt!
   "Reverse lookup"
   sgStrategy: SgStrategy
 }
@@ -45,9 +38,19 @@ type SgHarvest @entity {
 type SgStrategy @entity {
   "address"
   id: ID!
+  "network"
   network: SgNetwork
+  "Token Address"
   sett: SgSett
+  "active"
   active: Boolean
+  "total strategy performance fee collected"
+  performanceFee: BigInt!
+  "total strategy strategist fee collected"
+  strategyFee: BigInt!
+  "current Withdraw Fee"
+  withdrawFee: BigInt!
+  "List of Harvests"
   harvests: [SgHarvest!] @derivedFrom(field: "sgStrategy")
 }
 
