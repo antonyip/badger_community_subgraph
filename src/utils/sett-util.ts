@@ -113,6 +113,7 @@ export function getOrCreateToken(address: Address): Token {
     token.name = !name.reverted ? name.value : token.name;
     token.symbol = !symbol.reverted ? symbol.value : token.symbol;
     token.totalSupply = !totalSupply.reverted ? totalSupply.value : token.totalSupply;
+    token.address = address;
     token.save();
   }
 
