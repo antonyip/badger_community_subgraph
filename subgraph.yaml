@@ -1,9 +1,6 @@
 specVersion: 0.0.2
 schema:
   file: ./schema.graphql
-#graft:
-#  base: QmYDmPk1briFEp66KZUKBm2iCDn7q3cgqvnYzLgqQxKmwX
-#  block: 12640000
 dataSources:
   # ===== Tokens ====
   - kind: ethereum/contract
@@ -82,7 +79,7 @@ dataSources:
           file: ./abis/BadgerSett.json
       eventHandlers:
         - event: Transfer(indexed address,indexed address,uint256)
-          handler: wrappedHandleShareTransfer
+          handler: handleSett
       file: ./src/mapping.ts
   - kind: ethereum/contract
     name: nativeRenCrvSett
@@ -111,7 +108,7 @@ dataSources:
           file: ./abis/BadgerSett.json
       eventHandlers:
         - event: Transfer(indexed address,indexed address,uint256)
-          handler: wrappedHandleShareTransfer
+          handler: handleSett
       file: ./src/mapping.ts
   - kind: ethereum/contract
     name: nativeSbtcCrvSett
@@ -140,7 +137,7 @@ dataSources:
           file: ./abis/BadgerSett.json
       eventHandlers:
         - event: Transfer(indexed address,indexed address,uint256)
-          handler: wrappedHandleShareTransfer
+          handler: handleSett
       file: ./src/mapping.ts
   - kind: ethereum/contract
     name: nativeTbtcCrvSett
@@ -169,7 +166,7 @@ dataSources:
           file: ./abis/BadgerSett.json
       eventHandlers:
         - event: Transfer(indexed address,indexed address,uint256)
-          handler: wrappedHandleShareTransfer
+          handler: handleSett
       file: ./src/mapping.ts
   - kind: ethereum/contract
     name: nativeUniBadgerWbtcLpSett
@@ -198,7 +195,7 @@ dataSources:
           file: ./abis/BadgerSett.json
       eventHandlers:
         - event: Transfer(indexed address,indexed address,uint256)
-          handler: wrappedHandleShareTransfer
+          handler: handleSett
       file: ./src/mapping.ts
   - kind: ethereum/contract
     name: harvestRenCrvSett
@@ -227,7 +224,7 @@ dataSources:
           file: ./abis/BadgerSett.json
       eventHandlers:
         - event: Transfer(indexed address,indexed address,uint256)
-          handler: wrappedHandleShareTransfer
+          handler: handleSett
       file: ./src/mapping.ts
   - kind: ethereum/contract
     name: nativeSushiBadgerWbtcLpSett
@@ -256,7 +253,7 @@ dataSources:
           file: ./abis/BadgerSett.json
       eventHandlers:
         - event: Transfer(indexed address,indexed address,uint256)
-          handler: wrappedHandleShareTransfer
+          handler: handleSett
       file: ./src/mapping.ts
   - kind: ethereum/contract
     name: nativeSushiWbtcEthLpSett
@@ -285,7 +282,7 @@ dataSources:
           file: ./abis/BadgerSett.json
       eventHandlers:
         - event: Transfer(indexed address,indexed address,uint256)
-          handler: wrappedHandleShareTransfer
+          handler: handleSett
       file: ./src/mapping.ts
   - kind: ethereum/contract
     name: nativeUniDiggWbtcLpSett
@@ -314,7 +311,7 @@ dataSources:
           file: ./abis/BadgerSett.json
       eventHandlers:
         - event: Transfer(indexed address,indexed address,uint256)
-          handler: wrappedHandleShareTransfer
+          handler: handleSett
       file: ./src/mapping.ts
   - kind: ethereum/contract
     name: nativeSushiDiggWbtcLpSett
@@ -343,7 +340,7 @@ dataSources:
           file: ./abis/BadgerSett.json
       eventHandlers:
         - event: Transfer(indexed address,indexed address,uint256)
-          handler: wrappedHandleShareTransfer
+          handler: handleSett
       file: ./src/mapping.ts
   - kind: ethereum/contract
     name: nativeDiggSett
@@ -372,7 +369,7 @@ dataSources:
           file: ./abis/BadgerSett.json
       eventHandlers:
         - event: Transfer(indexed address,indexed address,uint256)
-          handler: wrappedHandleShareTransfer
+          handler: handleSett
       file: ./src/mapping.ts
   - kind: ethereum/contract
     name: nativeSushiIBtcWbtcLpSett
@@ -401,10 +398,8 @@ dataSources:
           file: ./abis/BadgerSett.json
       eventHandlers:
         - event: Transfer(indexed address,indexed address,uint256)
-          handler: wrappedHandleShareTransfer
+          handler: handleSett
       file: ./src/mapping.ts
-
-  # ===== Newer Setts ====
 
   - kind: ethereum/contract
     name: oBTC
@@ -429,7 +424,7 @@ dataSources:
           file: ./abis/BadgerSett.json
       eventHandlers:
         - event: Transfer(indexed address,indexed address,uint256)
-          handler: wrappedHandleShareTransfer2
+          handler: handleSett
       file: ./src/mapping.ts
 
   - kind: ethereum/contract
@@ -455,7 +450,7 @@ dataSources:
           file: ./abis/BadgerSett.json
       eventHandlers:
         - event: Transfer(indexed address,indexed address,uint256)
-          handler: wrappedHandleShareTransfer2
+          handler: handleSett
       file: ./src/mapping.ts
   
   - kind: ethereum/contract
@@ -481,7 +476,7 @@ dataSources:
           file: ./abis/BadgerSett.json
       eventHandlers:
         - event: Transfer(indexed address,indexed address,uint256)
-          handler: wrappedHandleShareTransfer2
+          handler: handleSett
       file: ./src/mapping.ts
   
   - kind: ethereum/contract
@@ -507,7 +502,7 @@ dataSources:
           file: ./abis/BadgerSett.json
       eventHandlers:
         - event: Transfer(indexed address,indexed address,uint256)
-          handler: wrappedHandleShareTransfer2
+          handler: handleSett
       file: ./src/mapping.ts
   - kind: ethereum/contract
     name: pBTC
@@ -532,7 +527,7 @@ dataSources:
           file: ./abis/BadgerSett.json
       eventHandlers:
         - event: Transfer(indexed address,indexed address,uint256)
-          handler: wrappedHandleShareTransfer2
+          handler: handleSett
       file: ./src/mapping.ts
   
   - kind: ethereum/contract
@@ -558,7 +553,7 @@ dataSources:
           file: ./abis/BadgerSett.json
       eventHandlers:
         - event: Transfer(indexed address,indexed address,uint256)
-          handler: wrappedHandleShareTransfer2
+          handler: handleSett
       file: ./src/mapping.ts
 
   - kind: ethereum/contract
@@ -584,7 +579,7 @@ dataSources:
           file: ./abis/BadgerSett.json
       eventHandlers:
         - event: Transfer(indexed address,indexed address,uint256)
-          handler: wrappedHandleShareTransfer2
+          handler: handleSett
       file: ./src/mapping.ts
 
   - kind: ethereum/contract
@@ -610,7 +605,7 @@ dataSources:
           file: ./abis/BadgerSett.json
       eventHandlers:
         - event: Transfer(indexed address,indexed address,uint256)
-          handler: wrappedHandleShareTransfer2
+          handler: handleSett
       file: ./src/mapping.ts
 
   # ===== Geysers ====
@@ -901,7 +896,9 @@ dataSources:
         - event: Unstaked(indexed address,uint256,uint256,indexed uint256,indexed uint256,bytes)
           handler: handleUnstaked
       file: ./src/mapping.ts
-  # ===== Farm Harvest ====
+
+  # ===== Harvest ====
+
   - kind: ethereum/contract
     name: harvestFarm
     network: mainnet
@@ -1008,6 +1005,7 @@ dataSources:
       file: ./src/mapping.ts
 
   # ===== Wrappers ====
+
   - kind: ethereum/contract
     name: YFI-WBTC
     network: mainnet
