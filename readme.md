@@ -47,4 +47,5 @@
 - UWE wants fees calculated
 - write something to maintain "Geysers in consts"
 - Figure out how to do testing on limited datasets as a full graph upload will take 15+ hours
-
+- https://duneanalytics.com/summmason/badger-dao
+- https://duneanalytics.com/gosuto
