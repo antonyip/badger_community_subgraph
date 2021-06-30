@@ -1,12 +1,11 @@
 import { Transfer } from '../../generated/renCrv_wd_renbtcCrv_daily/Vyper_Contract'
 import { BadgerDAODailyIncomeEvent } from  '../../generated/schema'
 
-
-
-export function handleFeeTransfer(event: Transfer)
+export function handleDailyIncomeTransfer (event: Transfer) : void
 {
-    if (event.transaction.from.toHexString() == "0x444B860128B7Bf8C0e864bDc3b7a36a940db7D88"
-    && event.transaction.to.toHexString() == "0x8dE82C4C968663a0284b01069DDE6EF231D0Ef9B")
+    //https://etherscan.io/tx/0xb73e035fb05580ef8388fd39ccacdf15b1f13cd7ce14b8564093d8c66e32e206
+    if (event.params._from.toHexString() == "0x444b860128b7bf8c0e864bdc3b7a36a940db7d88"
+    && event.params._to.toHexString() == "0x8de82c4c968663a0284b01069dde6ef231d0ef9b")
     {
         let id = event.address.toHexString()
         .concat("-")
@@ -15,8 +14,8 @@ export function handleFeeTransfer(event: Transfer)
         .concat(event.transactionLogIndex.toHexString());
         let badgerDAODailyIncomeEvent = new BadgerDAODailyIncomeEvent(id);
         badgerDAODailyIncomeEvent.timestamp = event.block.timestamp;
-        badgerDAODailyIncomeEvent.token = "0x2260fac5e5542a773aa44fbcfedf7c193bc2c599";
+        badgerDAODailyIncomeEvent.token = "0x49849c98ae39fff122806c06791fa73784fb3675";
         badgerDAODailyIncomeEvent.amount = event.params._value;
-
+        badgerDAODailyIncomeEvent.save();
     }
 }

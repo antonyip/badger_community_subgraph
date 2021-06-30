@@ -1054,7 +1054,7 @@ dataSources:
     name: renCrv_wd_renbtcCrv_daily
     network: mainnet
     source:
-      address: "0x2260fac5e5542a773aa44fbcfedf7c193bc2c599"
+      address: "0x49849c98ae39fff122806c06791fa73784fb3675"
       abi: Vyper_Contract
       startBlock: 11348423
     mapping:
@@ -1068,7 +1068,7 @@ dataSources:
           file: ./abis/Vyper_Contract.json
       eventHandlers:
         - event: Transfer(indexed address,indexed address,uint256)
-          handler: handleFeeTransfer
+          handler: handleDailyIncomeTransfer
       file: ./src/mapping.ts
 
 
