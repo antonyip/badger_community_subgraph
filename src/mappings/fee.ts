@@ -3,7 +3,7 @@ import { BadgerDAODailyIncomeEvent } from  '../../generated/schema'
 
 export function handleDailyIncomeTransfer (event: Transfer) : void
 {
-    //https://etherscan.io/tx/0xb73e035fb05580ef8388fd39ccacdf15b1f13cd7ce14b8564093d8c66e32e206
+    //https://etherscan.io/tx/0x9c1c5ddbda2ae217bd4ad3ca307fb709660a4c519193a3864328254124440011
     if (event.params._from.toHexString() == "0x444b860128b7bf8c0e864bdc3b7a36a940db7d88"
     && event.params._to.toHexString() == "0x8de82c4c968663a0284b01069dde6ef231d0ef9b")
     {
