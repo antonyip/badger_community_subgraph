@@ -1049,24 +1049,24 @@ dataSources:
       file: ./src/yearn-affiliate.ts
 
   # ===== Badger Daily Income ====
-#'\x49849c98ae39fff122806c06791fa73784fb3675'
-#'\x075b1bb99792c9E1041bA13afEf80C91a1e70fB3'
-#'\x64eda51d3ad40d56b9dfc5554e06f94e1dd786fd'
-#'\x8798249c2e607446efb7ad49ec89dd1865ff4272'
-#'\xceff51756c56ceffca006cd410b03ffc46dd3a58'
-#'\xa0246c9032bc3a600820415ae600c6388619a14d'
-#'\x2260fac5e5542a773aa44fbcfedf7c193bc2c599'
-#'\x18d98D452072Ac2EB7b74ce3DB723374360539f1'
-#'\xeb4c2781e4eba804ce9a9803c67d0893436bb27d'
-#'\xc4e15973e6ff2a35cc804c2cf9d2a1b817a8b40f'
+#'0x49849c98ae39fff122806c06791fa73784fb3675' - vyper_contract
+#'0x075b1bb99792c9E1041bA13afEf80C91a1e70fB3' - vyper_contract
+#'0x64eda51d3ad40d56b9dfc5554e06f94e1dd786fd' - vyper_contract
+#'0x8798249c2e607446efb7ad49ec89dd1865ff4272' - sushibar
+#'0xceff51756c56ceffca006cd410b03ffc46dd3a58' - UniswapV2Pair
+#'0xa0246c9032bc3a600820415ae600c6388619a14d' - RewardToken
+#'0x2260fac5e5542a773aa44fbcfedf7c193bc2c599' - WBTC
+#'0x18d98D452072Ac2EB7b74ce3DB723374360539f1' - UniswapV2Pair
+#'0xeb4c2781e4eba804ce9a9803c67d0893436bb27d' - RenBTC
+#'0xc4e15973e6ff2a35cc804c2cf9d2a1b817a8b40f' - bBTC
 
 
   - kind: ethereum/contract
-    name: renCrv_wd_renbtcCrv_daily
+    name: renCrv_wd_renbtcCrv
     network: mainnet
     source:
       address: "0x49849c98ae39fff122806c06791fa73784fb3675"
-      abi: Vyper_Contract
+      abi: ERC20
       startBlock: 11348423
     mapping:
       kind: ethereum/events
@@ -1075,19 +1075,19 @@ dataSources:
       entities:
         - TODO
       abis:
-        - name: Vyper_Contract
-          file: ./abis/Vyper_Contract.json
+        - name: ERC20
+          file: ./abis/ERC20.json
       eventHandlers:
         - event: Transfer(indexed address,indexed address,uint256)
           handler: handleDailyIncomeTransfer
       file: ./src/mapping.ts
 
   - kind: ethereum/contract
-    name: sbtcCrv_wd_sbtcCrv_daily
+    name: sbtcCrv_wd_sbtcCrv
     network: mainnet
     source:
       address: "0x075b1bb99792c9E1041bA13afEf80C91a1e70fB3"
-      abi: Vyper_Contract
+      abi: ERC20
       startBlock: 11348423
     mapping:
       kind: ethereum/events
@@ -1096,19 +1096,19 @@ dataSources:
       entities:
         - TODO
       abis:
-        - name: Vyper_Contract
-          file: ./abis/Vyper_Contract.json
+        - name: ERC20
+          file: ./abis/ERC20.json
       eventHandlers:
         - event: Transfer(indexed address,indexed address,uint256)
           handler: handleDailyIncomeTransfer
       file: ./src/mapping.ts
 
   - kind: ethereum/contract
-    name: tbtcCrv_wd_tbtcCrv_daily
+    name: tbtcCrv_wd_tbtcCrv
     network: mainnet
     source:
       address: "0x64eda51d3ad40d56b9dfc5554e06f94e1dd786fd"
-      abi: Vyper_Contract
+      abi: ERC20
       startBlock: 11348423
     mapping:
       kind: ethereum/events
@@ -1117,11 +1117,156 @@ dataSources:
       entities:
         - TODO
       abis:
-        - name: Vyper_Contract
-          file: ./abis/Vyper_Contract.json
+        - name: ERC20
+          file: ./abis/ERC20.json
       eventHandlers:
         - event: Transfer(indexed address,indexed address,uint256)
           handler: handleDailyIncomeTransfer
       file: ./src/mapping.ts
 
+  - kind: ethereum/contract
+    name: xSushi_daily
+    network: mainnet
+    source:
+      address: "0x8798249c2e607446efb7ad49ec89dd1865ff4272"
+      abi: ERC20
+      startBlock: 11348423
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      entities:
+        - TODO
+      abis:
+        - name: ERC20
+          file: ./abis/ERC20.json
+      eventHandlers:
+        - event: Transfer(indexed address,indexed address,uint256)
+          handler: handleDailyIncomeTransfer
+      file: ./src/mapping.ts
 
+  - kind: ethereum/contract
+    name: SLP_WBTC_ETH_daily
+    network: mainnet
+    source:
+      address: "0xceff51756c56ceffca006cd410b03ffc46dd3a58"
+      abi: ERC20
+      startBlock: 11348423
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      entities:
+        - TODO
+      abis:
+        - name: ERC20
+          file: ./abis/ERC20.json
+      eventHandlers:
+        - event: Transfer(indexed address,indexed address,uint256)
+          handler: handleDailyIncomeTransfer
+      file: ./src/mapping.ts
+
+  - kind: ethereum/contract
+    name: FARM_daily
+    network: mainnet
+    source:
+      address: "0xa0246c9032bc3a600820415ae600c6388619a14d"
+      abi: ERC20
+      startBlock: 11348423
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      entities:
+        - TODO
+      abis:
+        - name: ERC20
+          file: ./abis/ERC20.json
+      eventHandlers:
+        - event: Transfer(indexed address,indexed address,uint256)
+          handler: handleDailyIncomeTransfer
+      file: ./src/mapping.ts
+
+  - kind: ethereum/contract
+    name: WBTC_daily
+    network: mainnet
+    source:
+      address: "0x2260fac5e5542a773aa44fbcfedf7c193bc2c599"
+      abi: ERC20
+      startBlock: 11348423
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      entities:
+        - TODO
+      abis:
+        - name: ERC20
+          file: ./abis/ERC20.json
+      eventHandlers:
+        - event: Transfer(indexed address,indexed address,uint256)
+          handler: handleDailyIncomeTransfer
+      file: ./src/mapping.ts
+
+  - kind: ethereum/contract
+    name: SLP_WBTC_ibBTC_daily
+    network: mainnet
+    source:
+      address: "0x18d98D452072Ac2EB7b74ce3DB723374360539f1"
+      abi: ERC20
+      startBlock: 11348423
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      entities:
+        - TODO
+      abis:
+        - name: ERC20
+          file: ./abis/ERC20.json
+      eventHandlers:
+        - event: Transfer(indexed address,indexed address,uint256)
+          handler: handleDailyIncomeTransfer
+      file: ./src/mapping.ts
+
+  - kind: ethereum/contract
+    name: renBTC_daily
+    network: mainnet
+    source:
+      address: "0xeb4c2781e4eba804ce9a9803c67d0893436bb27d"
+      abi: ERC20
+      startBlock: 11348423
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      entities:
+        - TODO
+      abis:
+        - name: ERC20
+          file: ./abis/ERC20.json
+      eventHandlers:
+        - event: Transfer(indexed address,indexed address,uint256)
+          handler: handleDailyIncomeTransfer
+      file: ./src/mapping.ts
+
+  - kind: ethereum/contract
+    name: ibBTC_daily
+    network: mainnet
+    source:
+      address: "0xc4e15973e6ff2a35cc804c2cf9d2a1b817a8b40f"
+      abi: ERC20
+      startBlock: 11348423
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      entities:
+        - TODO
+      abis:
+        - name: ERC20
+          file: ./abis/ERC20.json
+      eventHandlers:
+        - event: Transfer(indexed address,indexed address,uint256)
+          handler: handleDailyIncomeTransfer
+      file: ./src/mapping.ts
