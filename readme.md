@@ -1,5 +1,6 @@
 # BadgerDAO Community Subgraphs
 - Access the SubGraph here! -> https://thegraph.com/explorer/subgraph/antonyip/badger_community_subgraph
+- Access the Wiki here! -> https://antonyip.github.io/badger_community_subgraph/
 
 ## Developer Dependencies
 - curl
@@ -28,6 +29,7 @@
 # Building Documentation
 - Edit the documentation in the documentation folder
 - ```cd documentation && make```
+- commit the changes in the "docs" folder
 
 # Others
 ### Wiki - Concept
