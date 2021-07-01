@@ -25,6 +25,10 @@
     - Need a new contract being tracked
     - Need more stats being added to the subgraphs (e.g block_timestamps / transactions IDs)
 
+# Building Documentation
+- Edit the documentation in the documentation folder
+- ```cd documentation && make```
+
 # Others
 ### Wiki - Concept
 - https://hackmd.io/@ElS-qKWRRA-Eh0fa_T2YAw/badger-community-subgraph
