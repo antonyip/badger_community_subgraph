@@ -20,3 +20,4 @@ help:
 	rm -rf docs
 	mkdir docs
 	cp -r build/html/* docs
+	touch docs/.nojekyll
