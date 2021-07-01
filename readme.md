@@ -1,5 +1,6 @@
 # BadgerDAO Community Subgraphs
 - Access the SubGraph here! -> https://thegraph.com/explorer/subgraph/antonyip/badger_community_subgraph
+- Access the Wiki here! -> https://antonyip.github.io/badger_community_subgraph/
 
 ## Developer Dependencies
 - curl
@@ -28,6 +29,7 @@
 # Building Documentation
 - Edit the documentation in the documentation folder
 - ```cd documentation && make```
+- commit the changes in the "docs" folder
 
 # Others
 ### Wiki - Concept
@@ -48,7 +50,6 @@
 - bsc contracts - https://github.com/Badger-Finance/badger-subgraph/compare/bsc
 - matic/polygon contracts
 - "seperate" the subgraph.yaml so that it would be easier to read that file.
-- UWE wants fees calculated
 - write something to maintain "Geysers in consts"
 - Figure out how to do testing on limited datasets as a full graph upload will take 15+ hours
 - https://duneanalytics.com/summmason/badger-dao
