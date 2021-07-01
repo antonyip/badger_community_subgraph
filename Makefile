@@ -19,4 +19,4 @@ help:
 	@$(SPHINXBUILD) -M $@ "$(SOURCEDIR)" "$(BUILDDIR)" $(SPHINXOPTS) $(O)
 	rm -rf docs
 	mkdir docs
-	cp -r build/html docs
+	cp -r build/html/* docs
