@@ -1,0 +1,1 @@
+https://badger-finance.gitbook.io/badger-finance/sett/strategies
