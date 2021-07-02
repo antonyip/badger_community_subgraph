@@ -7,4 +7,4 @@
     "logic": {
         "BadgerBridgeAdapter": "0x1362E51C1aA40fD180824D4A7Fc4F27E2BB3EFE5"
     }
-},
+}
