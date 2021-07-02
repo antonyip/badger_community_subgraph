@@ -3,7 +3,7 @@ import {
   SgUser,
   SgSett,
   SgSettBalance,
-  Token,
+  SgToken,
  } from "../../generated/schema"
  import { BadgerSett } from "../../generated/oBTC/BadgerSett"
  import { ERC20 } from "../../generated/oBTC/ERC20"
@@ -98,8 +98,8 @@ export function getOrCreateSettBalance(user: SgUser, sett: SgSett): SgSettBalanc
   return settBalance as SgSettBalance;
 }
 
-export function getOrCreateToken(address: Address): Token {
-  let token = Token.load(address.toHexString());
+export function getOrCreateToken(address: Address): SgToken {
+  let token = SgToken.load(address.toHexString());
 
   if (token == null) {
     let tokenContract = ERC20.bind(address);
@@ -108,7 +108,7 @@ export function getOrCreateToken(address: Address): Token {
     let symbol = tokenContract.try_symbol();
     let totalSupply = tokenContract.try_totalSupply();
 
-    token = new Token(address.toHexString());
+    token = new SgToken(address.toHexString());
     token.decimals = !decimals.reverted ? decimals.value : token.decimals;
     token.name = !name.reverted ? name.value : token.name;
     token.symbol = !symbol.reverted ? symbol.value : token.symbol;
@@ -117,7 +117,7 @@ export function getOrCreateToken(address: Address): Token {
     token.save();
   }
 
-  return token as Token;
+  return token as SgToken;
 };
 
 

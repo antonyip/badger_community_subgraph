@@ -1,5 +1,5 @@
 import { Transfer } from '../../generated/oBTC/BadgerSett'
-import { BadgerDAODailyIncomeEvent } from  '../../generated/schema'
+import { SgFeesCollected } from  '../../generated/schema'
 
 export function handleDailyIncomeTransfer (event: Transfer) : void
 {
@@ -13,11 +13,11 @@ export function handleDailyIncomeTransfer (event: Transfer) : void
         .concat(event.transaction.hash.toHexString())
         .concat("-")
         .concat(event.transactionLogIndex.toHexString());
-        let badgerDAODailyIncomeEvent = new BadgerDAODailyIncomeEvent(id);
-        badgerDAODailyIncomeEvent.timestamp = event.block.timestamp;
-        badgerDAODailyIncomeEvent.token = "0x49849c98ae39fff122806c06791fa73784fb3675";
-        badgerDAODailyIncomeEvent.amount = event.params.value;
-        badgerDAODailyIncomeEvent.save();
+        let sgFeesCollected = new SgFeesCollected(id);
+        sgFeesCollected.timestamp = event.block.timestamp;
+        sgFeesCollected.token = "0x49849c98ae39fff122806c06791fa73784fb3675";
+        sgFeesCollected.amount = event.params.value;
+        sgFeesCollected.save();
     }
 
     //sbtcCrv_wd_sbtcCrv_daily
@@ -29,11 +29,11 @@ export function handleDailyIncomeTransfer (event: Transfer) : void
         .concat(event.transaction.hash.toHexString())
         .concat("-")
         .concat(event.transactionLogIndex.toHexString());
-        let badgerDAODailyIncomeEvent = new BadgerDAODailyIncomeEvent(id);
-        badgerDAODailyIncomeEvent.timestamp = event.block.timestamp;
-        badgerDAODailyIncomeEvent.token = "0x075b1bb99792c9e1041ba13afef80c91a1e70fb3";
-        badgerDAODailyIncomeEvent.amount = event.params.value;
-        badgerDAODailyIncomeEvent.save();
+        let sgFeesCollected = new SgFeesCollected(id);
+        sgFeesCollected.timestamp = event.block.timestamp;
+        sgFeesCollected.token = "0x075b1bb99792c9e1041ba13afef80c91a1e70fb3";
+        sgFeesCollected.amount = event.params.value;
+        sgFeesCollected.save();
     }
 
     //tbtcCrv_wd_tbtcCrv_daily
@@ -45,11 +45,11 @@ export function handleDailyIncomeTransfer (event: Transfer) : void
         .concat(event.transaction.hash.toHexString())
         .concat("-")
         .concat(event.transactionLogIndex.toHexString());
-        let badgerDAODailyIncomeEvent = new BadgerDAODailyIncomeEvent(id);
-        badgerDAODailyIncomeEvent.timestamp = event.block.timestamp;
-        badgerDAODailyIncomeEvent.token = "0x64eda51d3ad40d56b9dfc5554e06f94e1dd786fd";
-        badgerDAODailyIncomeEvent.amount = event.params.value;
-        badgerDAODailyIncomeEvent.save();
+        let sgFeesCollected = new SgFeesCollected(id);
+        sgFeesCollected.timestamp = event.block.timestamp;
+        sgFeesCollected.token = "0x64eda51d3ad40d56b9dfc5554e06f94e1dd786fd";
+        sgFeesCollected.amount = event.params.value;
+        sgFeesCollected.save();
     }
 
     // sushiWbtcEth_pf_xSUSHI_daily
@@ -61,11 +61,11 @@ export function handleDailyIncomeTransfer (event: Transfer) : void
         .concat(event.transaction.hash.toHexString())
         .concat("-")
         .concat(event.transactionLogIndex.toHexString());
-        let badgerDAODailyIncomeEvent = new BadgerDAODailyIncomeEvent(id);
-        badgerDAODailyIncomeEvent.timestamp = event.block.timestamp;
-        badgerDAODailyIncomeEvent.token = "0x8798249c2e607446efb7ad49ec89dd1865ff4272";
-        badgerDAODailyIncomeEvent.amount = event.params.value;
-        badgerDAODailyIncomeEvent.save();
+        let sgFeesCollected = new SgFeesCollected(id);
+        sgFeesCollected.timestamp = event.block.timestamp;
+        sgFeesCollected.token = "0x8798249c2e607446efb7ad49ec89dd1865ff4272";
+        sgFeesCollected.amount = event.params.value;
+        sgFeesCollected.save();
     }
 
     //sushiWbtcEth_wd_slpWbtcEth_daily
@@ -77,11 +77,11 @@ export function handleDailyIncomeTransfer (event: Transfer) : void
         .concat(event.transaction.hash.toHexString())
         .concat("-")
         .concat(event.transactionLogIndex.toHexString());
-        let badgerDAODailyIncomeEvent = new BadgerDAODailyIncomeEvent(id);
-        badgerDAODailyIncomeEvent.timestamp = event.block.timestamp;
-        badgerDAODailyIncomeEvent.token = "0xceff51756c56ceffca006cd410b03ffc46dd3a58";
-        badgerDAODailyIncomeEvent.amount = event.params.value;
-        badgerDAODailyIncomeEvent.save();
+        let sgFeesCollected = new SgFeesCollected(id);
+        sgFeesCollected.timestamp = event.block.timestamp;
+        sgFeesCollected.token = "0xceff51756c56ceffca006cd410b03ffc46dd3a58";
+        sgFeesCollected.amount = event.params.value;
+        sgFeesCollected.save();
     }
 
     //sushiBadgerWbtc_pf_xSUSHI_daily
@@ -93,11 +93,11 @@ export function handleDailyIncomeTransfer (event: Transfer) : void
         .concat(event.transaction.hash.toHexString())
         .concat("-")
         .concat(event.transactionLogIndex.toHexString());
-        let badgerDAODailyIncomeEvent = new BadgerDAODailyIncomeEvent(id);
-        badgerDAODailyIncomeEvent.timestamp = event.block.timestamp;
-        badgerDAODailyIncomeEvent.token = "0x8798249c2e607446efb7ad49ec89dd1865ff4272";
-        badgerDAODailyIncomeEvent.amount = event.params.value;
-        badgerDAODailyIncomeEvent.save();
+        let sgFeesCollected = new SgFeesCollected(id);
+        sgFeesCollected.timestamp = event.block.timestamp;
+        sgFeesCollected.token = "0x8798249c2e607446efb7ad49ec89dd1865ff4272";
+        sgFeesCollected.amount = event.params.value;
+        sgFeesCollected.save();
     }
 
     //sushiDiggWbtc_pf_xSUSHI_daily
@@ -109,11 +109,11 @@ export function handleDailyIncomeTransfer (event: Transfer) : void
         .concat(event.transaction.hash.toHexString())
         .concat("-")
         .concat(event.transactionLogIndex.toHexString());
-        let badgerDAODailyIncomeEvent = new BadgerDAODailyIncomeEvent(id);
-        badgerDAODailyIncomeEvent.timestamp = event.block.timestamp;
-        badgerDAODailyIncomeEvent.token = "0x8798249c2e607446efb7ad49ec89dd1865ff4272";
-        badgerDAODailyIncomeEvent.amount = event.params.value;
-        badgerDAODailyIncomeEvent.save();
+        let sgFeesCollected = new SgFeesCollected(id);
+        sgFeesCollected.timestamp = event.block.timestamp;
+        sgFeesCollected.token = "0x8798249c2e607446efb7ad49ec89dd1865ff4272";
+        sgFeesCollected.amount = event.params.value;
+        sgFeesCollected.save();
     }
 
     //harvestRenCrv_pf_FARM_daily
@@ -125,11 +125,11 @@ export function handleDailyIncomeTransfer (event: Transfer) : void
         .concat(event.transaction.hash.toHexString())
         .concat("-")
         .concat(event.transactionLogIndex.toHexString());
-        let badgerDAODailyIncomeEvent = new BadgerDAODailyIncomeEvent(id);
-        badgerDAODailyIncomeEvent.timestamp = event.block.timestamp;
-        badgerDAODailyIncomeEvent.token = "0xa0246c9032bc3a600820415ae600c6388619a14d";
-        badgerDAODailyIncomeEvent.amount = event.params.value;
-        badgerDAODailyIncomeEvent.save();
+        let sgFeesCollected = new SgFeesCollected(id);
+        sgFeesCollected.timestamp = event.block.timestamp;
+        sgFeesCollected.token = "0xa0246c9032bc3a600820415ae600c6388619a14d";
+        sgFeesCollected.amount = event.params.value;
+        sgFeesCollected.save();
     }
 
     //harvestRenCrv_wd_renbtcCrv_daily
@@ -141,11 +141,11 @@ export function handleDailyIncomeTransfer (event: Transfer) : void
         .concat(event.transaction.hash.toHexString())
         .concat("-")
         .concat(event.transactionLogIndex.toHexString());
-        let badgerDAODailyIncomeEvent = new BadgerDAODailyIncomeEvent(id);
-        badgerDAODailyIncomeEvent.timestamp = event.block.timestamp;
-        badgerDAODailyIncomeEvent.token = "0x49849c98ae39fff122806c06791fa73784fb3675";
-        badgerDAODailyIncomeEvent.amount = event.params.value;
-        badgerDAODailyIncomeEvent.save();
+        let sgFeesCollected = new SgFeesCollected(id);
+        sgFeesCollected.timestamp = event.block.timestamp;
+        sgFeesCollected.token = "0x49849c98ae39fff122806c06791fa73784fb3675";
+        sgFeesCollected.amount = event.params.value;
+        sgFeesCollected.save();
     }
 
     //yearnWbtc_wd_WBTC_daily
@@ -157,11 +157,11 @@ export function handleDailyIncomeTransfer (event: Transfer) : void
         .concat(event.transaction.hash.toHexString())
         .concat("-")
         .concat(event.transactionLogIndex.toHexString());
-        let badgerDAODailyIncomeEvent = new BadgerDAODailyIncomeEvent(id);
-        badgerDAODailyIncomeEvent.timestamp = event.block.timestamp;
-        badgerDAODailyIncomeEvent.token = "0x2260fac5e5542a773aa44fbcfedf7c193bc2c599";
-        badgerDAODailyIncomeEvent.amount = event.params.value;
-        badgerDAODailyIncomeEvent.save();
+        let sgFeesCollected = new SgFeesCollected(id);
+        sgFeesCollected.timestamp = event.block.timestamp;
+        sgFeesCollected.token = "0x2260fac5e5542a773aa44fbcfedf7c193bc2c599";
+        sgFeesCollected.amount = event.params.value;
+        sgFeesCollected.save();
     }
 
     //sushiWbtcIbbtc_pf_xSUSHI_daily
@@ -173,11 +173,11 @@ export function handleDailyIncomeTransfer (event: Transfer) : void
         .concat(event.transaction.hash.toHexString())
         .concat("-")
         .concat(event.transactionLogIndex.toHexString());
-        let badgerDAODailyIncomeEvent = new BadgerDAODailyIncomeEvent(id);
-        badgerDAODailyIncomeEvent.timestamp = event.block.timestamp;
-        badgerDAODailyIncomeEvent.token = "0x8798249c2e607446efb7ad49ec89dd1865ff4272";
-        badgerDAODailyIncomeEvent.amount = event.params.value;
-        badgerDAODailyIncomeEvent.save();
+        let sgFeesCollected = new SgFeesCollected(id);
+        sgFeesCollected.timestamp = event.block.timestamp;
+        sgFeesCollected.token = "0x8798249c2e607446efb7ad49ec89dd1865ff4272";
+        sgFeesCollected.amount = event.params.value;
+        sgFeesCollected.save();
     }
 
     //sushiWbtcIbbtc_wd_slpIbbtcWbtc_daily
@@ -189,11 +189,11 @@ export function handleDailyIncomeTransfer (event: Transfer) : void
         .concat(event.transaction.hash.toHexString())
         .concat("-")
         .concat(event.transactionLogIndex.toHexString());
-        let badgerDAODailyIncomeEvent = new BadgerDAODailyIncomeEvent(id);
-        badgerDAODailyIncomeEvent.timestamp = event.block.timestamp;
-        badgerDAODailyIncomeEvent.token = "0x18d98d452072ac2eb7b74ce3db723374360539f1";
-        badgerDAODailyIncomeEvent.amount = event.params.value;
-        badgerDAODailyIncomeEvent.save();
+        let sgFeesCollected = new SgFeesCollected(id);
+        sgFeesCollected.timestamp = event.block.timestamp;
+        sgFeesCollected.token = "0x18d98d452072ac2eb7b74ce3db723374360539f1";
+        sgFeesCollected.amount = event.params.value;
+        sgFeesCollected.save();
     }
 
     //btcBridge_mint_renbtc_daily - 1
@@ -205,11 +205,11 @@ export function handleDailyIncomeTransfer (event: Transfer) : void
         .concat(event.transaction.hash.toHexString())
         .concat("-")
         .concat(event.transactionLogIndex.toHexString());
-        let badgerDAODailyIncomeEvent = new BadgerDAODailyIncomeEvent(id);
-        badgerDAODailyIncomeEvent.timestamp = event.block.timestamp;
-        badgerDAODailyIncomeEvent.token = "0xeb4c2781e4eba804ce9a9803c67d0893436bb27d-mint";
-        badgerDAODailyIncomeEvent.amount = event.params.value;
-        badgerDAODailyIncomeEvent.save();
+        let sgFeesCollected = new SgFeesCollected(id);
+        sgFeesCollected.timestamp = event.block.timestamp;
+        sgFeesCollected.token = "0xeb4c2781e4eba804ce9a9803c67d0893436bb27d-mint";
+        sgFeesCollected.amount = event.params.value;
+        sgFeesCollected.save();
     }
     //btcBridge_mint_renbtc_daily - 2
     if (event.params.from.toHexString() == "0xb6ea1d3fb9100a2cf166febe11f24367b5fcd24a"
@@ -220,11 +220,11 @@ export function handleDailyIncomeTransfer (event: Transfer) : void
         .concat(event.transaction.hash.toHexString())
         .concat("-")
         .concat(event.transactionLogIndex.toHexString());
-        let badgerDAODailyIncomeEvent = new BadgerDAODailyIncomeEvent(id);
-        badgerDAODailyIncomeEvent.timestamp = event.block.timestamp;
-        badgerDAODailyIncomeEvent.token = "0xeb4c2781e4eba804ce9a9803c67d0893436bb27d-mint";
-        badgerDAODailyIncomeEvent.amount = event.params.value;
-        badgerDAODailyIncomeEvent.save();
+        let sgFeesCollected = new SgFeesCollected(id);
+        sgFeesCollected.timestamp = event.block.timestamp;
+        sgFeesCollected.token = "0xeb4c2781e4eba804ce9a9803c67d0893436bb27d-mint";
+        sgFeesCollected.amount = event.params.value;
+        sgFeesCollected.save();
     }
 
     //btcBridge_burn_renbtc_daily - 1
@@ -236,11 +236,11 @@ export function handleDailyIncomeTransfer (event: Transfer) : void
         .concat(event.transaction.hash.toHexString())
         .concat("-")
         .concat(event.transactionLogIndex.toHexString());
-        let badgerDAODailyIncomeEvent = new BadgerDAODailyIncomeEvent(id);
-        badgerDAODailyIncomeEvent.timestamp = event.block.timestamp;
-        badgerDAODailyIncomeEvent.token = "0xeb4c2781e4eba804ce9a9803c67d0893436bb27d-burn";
-        badgerDAODailyIncomeEvent.amount = event.params.value;
-        badgerDAODailyIncomeEvent.save();
+        let sgFeesCollected = new SgFeesCollected(id);
+        sgFeesCollected.timestamp = event.block.timestamp;
+        sgFeesCollected.token = "0xeb4c2781e4eba804ce9a9803c67d0893436bb27d-burn";
+        sgFeesCollected.amount = event.params.value;
+        sgFeesCollected.save();
     }
     //btcBridge_burn_renbtc_daily - 2
     if (event.params.from.toHexString() == "0xb65cef03b9b89f99517643226d76e286ee999e77"
@@ -251,11 +251,11 @@ export function handleDailyIncomeTransfer (event: Transfer) : void
         .concat(event.transaction.hash.toHexString())
         .concat("-")
         .concat(event.transactionLogIndex.toHexString());
-        let badgerDAODailyIncomeEvent = new BadgerDAODailyIncomeEvent(id);
-        badgerDAODailyIncomeEvent.timestamp = event.block.timestamp;
-        badgerDAODailyIncomeEvent.token = "0xeb4c2781e4eba804ce9a9803c67d0893436bb27d-burn";
-        badgerDAODailyIncomeEvent.amount = event.params.value;
-        badgerDAODailyIncomeEvent.save();
+        let sgFeesCollected = new SgFeesCollected(id);
+        sgFeesCollected.timestamp = event.block.timestamp;
+        sgFeesCollected.token = "0xeb4c2781e4eba804ce9a9803c67d0893436bb27d-burn";
+        sgFeesCollected.amount = event.params.value;
+        sgFeesCollected.save();
     }
 
     if (event.params.from.toHexString() == "0x0000000000000000000000000000000000000000"
@@ -266,11 +266,11 @@ export function handleDailyIncomeTransfer (event: Transfer) : void
         .concat(event.transaction.hash.toHexString())
         .concat("-")
         .concat(event.transactionLogIndex.toHexString());
-        let badgerDAODailyIncomeEvent = new BadgerDAODailyIncomeEvent(id);
-        badgerDAODailyIncomeEvent.timestamp = event.block.timestamp;
-        badgerDAODailyIncomeEvent.token = "0xc4e15973e6ff2a35cc804c2cf9d2a1b817a8b40f";
-        badgerDAODailyIncomeEvent.amount = event.params.value;
-        badgerDAODailyIncomeEvent.save();
+        let sgFeesCollected = new SgFeesCollected(id);
+        sgFeesCollected.timestamp = event.block.timestamp;
+        sgFeesCollected.token = "0xc4e15973e6ff2a35cc804c2cf9d2a1b817a8b40f";
+        sgFeesCollected.amount = event.params.value;
+        sgFeesCollected.save();
     }
 
     if (event.params.from.toHexString() == "0x3b823864cd0cbad8a1f2b65d4807906775becaa7"
@@ -281,10 +281,10 @@ export function handleDailyIncomeTransfer (event: Transfer) : void
         .concat(event.transaction.hash.toHexString())
         .concat("-")
         .concat(event.transactionLogIndex.toHexString());
-        let badgerDAODailyIncomeEvent = new BadgerDAODailyIncomeEvent(id);
-        badgerDAODailyIncomeEvent.timestamp = event.block.timestamp;
-        badgerDAODailyIncomeEvent.token = "0xc4e15973e6ff2a35cc804c2cf9d2a1b817a8b40f";
-        badgerDAODailyIncomeEvent.amount = event.params.value;
-        badgerDAODailyIncomeEvent.save();
+        let sgFeesCollected = new SgFeesCollected(id);
+        sgFeesCollected.timestamp = event.block.timestamp;
+        sgFeesCollected.token = "0xc4e15973e6ff2a35cc804c2cf9d2a1b817a8b40f";
+        sgFeesCollected.amount = event.params.value;
+        sgFeesCollected.save();
     }
 }

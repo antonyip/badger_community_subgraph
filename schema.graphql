@@ -92,7 +92,7 @@ type SgSett @entity {
   "Share token symbol"
   symbol: String!
   "Deposit token"
-  token: Token!
+  token: SgToken!
   "Deposit token per share"
   pricePerFullShare: BigInt!
   "Shares outstanding"
@@ -149,7 +149,7 @@ type SgUser @entity {
 }
 
 # Ported from - yVault@Token
-type Token @entity {
+type SgToken @entity {
   id: ID!
   address: Bytes!
   decimals: Int!
@@ -159,7 +159,7 @@ type Token @entity {
   totalSupply: BigInt
 }
 
-type BadgerDAODailyIncomeEvent @entity {
+type SgFeesCollected @entity {
   id: ID!
   timestamp: BigInt!
   amount: BigInt!
