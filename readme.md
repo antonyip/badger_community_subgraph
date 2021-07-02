@@ -48,9 +48,11 @@
 
 # TODOS...
 - bsc contracts - https://github.com/Badger-Finance/badger-subgraph/compare/bsc
+- https://github.com/Badger-Finance/badger-system/blob/multichain/badger-deploy-bsc.json
 - matic/polygon contracts
 - "seperate" the subgraph.yaml so that it would be easier to read that file.
 - write something to maintain "Geysers in consts"
 - Figure out how to do testing on limited datasets as a full graph upload will take 15+ hours
+- Add the rest of the strategies...
 - https://duneanalytics.com/summmason/badger-dao
 - https://duneanalytics.com/gosuto

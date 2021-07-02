@@ -987,7 +987,7 @@ dataSources:
     name: harvestSushiWbtcDigg
     network: mainnet
     source:
-      address: "0x16626fd20b8e1541fdb85d9e63def368b374fa75"
+      address: "0xaa8dddfe7dfa3c3269f1910d89e4413dd006d08a"
       abi: StrategySushiDiggWbtcLpOptimizer
       startBlock: 11676338
     mapping:
@@ -995,7 +995,7 @@ dataSources:
       apiVersion: 0.0.4
       language: wasm/assemblyscript
       entities:
-        - SushiHarvestEvent
+        - SushiHarvestEvent 
       abis:
         - name: StrategySushiDiggWbtcLpOptimizer
           file: ./abis/StrategySushiDiggWbtcLpOptimizer.json

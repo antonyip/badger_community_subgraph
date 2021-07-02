@@ -1,17 +1,15 @@
-# Welcome to MkDocs
+# Welcome to BadgerDAO - Subgraph Wiki
 
-For full documentation visit [mkdocs.org](https://mkdocs.org).
+```
+Important things...
+Tokens - 4 of them - Track Transfers.
+Geyser - 11 of them - Tracks Stacked and UnStake Events.
+Sett - 20 of them (13 old + 7 new) - Transfer Event does something we are interested in...
+Harvest/Strategy - (13 old + 7 new + 1 experimental) - HarvestState does something that we are interested in...
+Fees - Specific Transfers from Strategies to BadgerDAO.
+```
 
-## Commands
-
-* `mkdocs new [dir-name]` - Create a new project.
-* `mkdocs serve` - Start the live-reloading docs server.
-* `mkdocs build` - Build the documentation site.
-* `mkdocs help` - Print this help message.
-
-## Project layout
-
-    mkdocs.yml    # The configuration file.
-    docs/
-        index.md  # The documentation homepage.
-        ...       # Other markdown pages, images and other files.
+Geysers are correct
+Setts are correct (less contract abi, but we don't use V3/V4 features)
+TODO: Harvest/Strategy are missing quite abit
+TODO: Tokens are missing bBadger and bDigg

@@ -20,7 +20,7 @@ export function settLogic(
   //let from = getOrCreateUser(event.params.from);
   let from = getOrCreateUser(fromUser);  
   //let to = getOrCreateUser(event.params.to);
-  let to = getOrCreateUser(fromUser);
+  let to = getOrCreateUser(toUser);
   
 
   // get share and token values
