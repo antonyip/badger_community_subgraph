@@ -1,32 +1,21 @@
 import { Address } from '@graphprotocol/graph-ts';
 
 import { Transfer, UFragments } from '../../generated/Digg/UFragments';
-import { SgTransfer } from '../../generated/schema'
-import { getCurrentNetwork } from '../utils/network'
-import { getOrCreateUser } from '../utils/sett-util';
-
+import { getOrCreateTokenBalance } from '../utils/helpers/token/balance';
 export function handleDiggTransfer(event: Transfer): void {
-  // Record the Transfer
-  let sgTransfer = new SgTransfer(event.transaction.hash.toHexString());
-  sgTransfer.network = getCurrentNetwork();
-  sgTransfer.from = event.transaction.from.toHexString();
-  sgTransfer.to = event.transaction.to.toHexString();
-  sgTransfer.sett = '0x798d1be841a82a273720ce31c822c61a67a601c3'
-  sgTransfer.amount = event.transaction.value;
-  sgTransfer.save();
+  let diggToken = Address.fromString('0x798d1be841a82a273720ce31c822c61a67a601c3');
+  let digg = UFragments.bind(diggToken);
+  let fromId = event.params.from
+    .toHexString()
+    .concat('-')
+    .concat(diggToken.toHexString());
+  let toId = event.params.to.toHexString().concat('-').concat(diggToken.toHexString());
+  let fromAccount = getOrCreateTokenBalance(fromId, diggToken);
+  let toAccount = getOrCreateTokenBalance(toId, diggToken);
+  let shares = digg.fragmentsToShares(event.params.value);
+  fromAccount.balance = fromAccount.balance.minus(shares);
+  toAccount.balance = toAccount.balance.plus(shares);
 
-  // Update User Transactions
-  if (event.transaction.from != null)
-  {
-    let sgAccountFrom = getOrCreateUser(event.transaction.from as Address);
-    sgAccountFrom.transfers.push(sgTransfer.id);
-    sgAccountFrom.save();
-  }
-
-  if (event.transaction.to != null)
-  {
-    let sgAccountTo = getOrCreateUser(event.transaction.to as Address);
-    sgAccountTo.transfers.push(sgTransfer.id);
-    sgAccountTo.save();
-  }
+  fromAccount.save();
+  toAccount.save();
 }

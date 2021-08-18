@@ -1,160 +1,308 @@
-type SgNetwork @entity {
-  id: ID! 
-  name: String!
-}
-
-type SgTransfer @entity {
-  "hash"
+type Vault @entity {
   id: ID!
-  network: SgNetwork!
-  "Token Address"
-  sett: SgSett
-  from: String!
-  to: String!
-  amount: BigInt!
-  "Reverse lookup"
-  sgGeyser: SgGeyser
-}
-
-type SgHarvest @entity {
-  "hash"
-  id: ID!
-  "network"
-  network: SgNetwork
-  "Token Address"
-  sett: SgSett
-  "performance fee for this harvest"
-  performanceFee: BigInt!
-  "strategy fee for this harvest"
-  strategyFee: BigInt!
-  "total token claimed"
-  harvested: BigInt!
-  "total token reinvested"
-  compounded: BigInt!
-  "Reverse lookup"
-  sgStrategy: SgStrategy
-}
-
-type SgStrategy @entity {
-  "address"
-  id: ID!
-  "network"
-  network: SgNetwork
-  "Token Address"
-  sett: SgSett
-  "active"
-  active: Boolean
-  "strategy performance fee"
-  performanceFee: BigInt!
-  "strategy strategist fee"
-  strategyFee: BigInt!
-  "strategy withdrawal Fee"
-  withdrawFee: BigInt!
-  "List of Harvests"
-  harvests: [SgHarvest!] @derivedFrom(field: "sgStrategy")
-}
-
-# type SgSettContract @entity {
-#   "address-network"
-#   id: ID!
-#   network: SgNetwork
-#   transfers: [SgTransfer!]
-#   deposits: [SgTransfer!]
-#   withdraws: [SgTransfer!]
-#   balanceData: SgSettBalance
-#   strategies: [SgStrategy!]
-#   harvests: [SgHarvest!]
-# }
-
-type SgGeyser @entity {
-  "address-network"
-  id: ID!
-  "eth / bsc"
-  network: SgNetwork
-  "staked / unstaked"
-  transactions: [SgTransfer!] @derivedFrom(field: "sgGeyser")
-  "Current Geyser deposit token value"
-  netDeposit: BigInt!
-  "Total sett deposit token value"
-  grossDeposit: BigInt!
-  "Total sett withdraw token value"
-  grossWithdraw: BigInt!
-}
-
-# Ported from - Badger-DAO@Sett
-type SgSett @entity {
-  "address-network"
-  id: ID!
-  "network"
-  network: SgNetwork
-  "Sett name"
-  name: String!
-  "Share token symbol"
-  symbol: String!
+  "Amount of underlying token per 1 share"
+  pricePerFullShare: BigDecimal!
+  "Total shares supply"
+  totalSupply: BigDecimal!
+  "Full vault underlying token balance (vault + strategy)"
+  vaultBalance: BigDecimal!
+  "Strategy underlying token balance"
+  strategyBalance: BigDecimal!
+  # TODO:
+  "How much the vault allows to be borrowed"
+  available: BigDecimal!
   "Deposit token"
-  token: Token!
-  "Deposit token per share"
-  pricePerFullShare: BigInt!
-  "Shares outstanding"
-  balance: BigInt!
-  "Deposit tokens outstanding"
-  totalSupply: BigInt!
-  "Current sett deposit token value"
-  netDeposit: BigInt!
-  "Total sett deposit token value"
-  grossDeposit: BigInt!
-  "Total sett withdraw token value"
-  grossWithdraw: BigInt!
-  "Current sett deposit share value"
-  netShareDeposit: BigInt!
-  "Total sett deposit share value"
-  grossShareDeposit: BigInt!
-  "Total sett withdraw share value"
-  grossShareWithdraw: BigInt!
+  underlyingToken: Token!
+  shareToken: Token!
+  currentController: Controller
+  currentStrategy: Strategy
+  "Transaction metadata for the last update"
+  transaction: Transaction!
+  # TODO:
+  "balance: totalDeposited - totalWithdrawn: all deposits of underlying made by external accounts"
+  netDeposits: BigDecimal!
+  totalDeposited: BigDecimal!
+  totalWithdrawn: BigDecimal!
+  "totalActiveShares: totalSharesMinted - totalSharesBurned"
+  totalActiveShares: BigDecimal!
+  totalSharesMinted: BigDecimal!
+  totalSharesBurned: BigDecimal!
+  totalEarnings: BigDecimal!
+  # raw
+  pricePerFullShareRaw: BigInt!
+  totalSupplyRaw: BigInt!
+  # TODO:
+  "Balance of the Vault contract of underlying Token + balance of the Strategy contract of underlying Token"
+  vaultBalanceRaw: BigInt!
+  # TODO:
+  "Balance of underlying Token specifically held in the strategy"
+  strategyBalanceRaw: BigInt!
+  # TODO:
+  "How much the vault allows to be borrowed"
+  availableRaw: BigInt!
+  netDepositsRaw: BigInt!
+  totalDepositedRaw: BigInt!
+  totalWithdrawnRaw: BigInt!
+  totalActiveSharesRaw: BigInt!
+  totalSharesMintedRaw: BigInt!
+  totalSharesBurnedRaw: BigInt!
+  totalEarningsRaw: BigInt!
+  totalHarvestCalls: BigInt!
+  # derived fields
+  transfers: [Transfer!]! @derivedFrom(field: "vault")
+  deposits: [Deposit!]! @derivedFrom(field: "vault")
+  withdrawals: [Withdrawal!]! @derivedFrom(field: "vault")
+  harvests: [Harvest!]! @derivedFrom(field: "vault")
+  balances: [AccountVaultBalance!]! @derivedFrom(field: "vault")
+  strategies: [Strategy!] @derivedFrom(field: "vault")
+  controllers: [Controller!] @derivedFrom(field: "vault")
 }
 
-# Ported from - Badger-DAO@UserSettBalance
-type SgSettBalance @entity {
-  "address-network-token"
+type Account @entity {
+  "User ethereum address"
   id: ID!
-  "address"
-  user: SgUser!
-  "which sett token is this balance for"
-  sett: SgSett!
-  "network"
-  network: SgNetwork!
-  "Current user deposit token value"
-  netDeposit: BigInt!
-  "Total user deposit token value"
-  grossDeposit: BigInt!
-  "Total user withdraw token value"
-  grossWithdraw: BigInt!
-  "Current user deposit share value"
-  netShareDeposit: BigInt!
-  "Total user deposit share value"
-  grossShareDeposit: BigInt!
-  "Total user withdraw share value"
-  grossShareWithdraw: BigInt!
+  vaultBalances: [AccountVaultBalance!]! @derivedFrom(field: "account")
+  "Account deposits"
+  deposits: [Deposit!]! @derivedFrom(field: "account")
+  "Account withdrawals"
+  withdrawals: [Deposit!]! @derivedFrom(field: "account")
+  "Incoming transfers"
+  receivedTransfers: [Transfer!]! @derivedFrom(field: "to")
+  "Outgoing transfers"
+  sentTransfers: [Transfer!]! @derivedFrom(field: "from")
 }
 
-# Ported from - Badger-DAO@User
-type SgUser @entity {
-  "address"
+type AccountVaultBalance @entity {
   id: ID!
-  network: SgNetwork!
-  deposits: [SgTransfer!]
-  withdraws: [SgTransfer!]
-  transfers: [SgTransfer!]
-  balances: [SgSettBalance!] @derivedFrom(field: "user")
+  vault: Vault!
+  account: Account!
+  "Deposit/withdrawal token"
+  underlyingToken: Token!
+  shareToken: Token!
+  "Net deposits of a given Account within a given Vault. Transfers between accounts are taken into consideration for this metric"
+  netDeposits: BigDecimal!
+  "Total tokens deposited by this Account in Vault"
+  totalDeposited: BigDecimal!
+  "Total tokens withdrawn by this Account in Vault"
+  totalWithdrawn: BigDecimal!
+  "Total tokens sent to another account by this Account in Vault"
+  totalSent: BigDecimal!
+  "Total tokens received from another account by this Account in Vault"
+  totalReceived: BigDecimal!
+  "Shares are the token minted by the Vault"
+  shareBalance: BigDecimal!
+  totalSharesMinted: BigDecimal!
+  totalSharesBurned: BigDecimal!
+  totalSharesSent: BigDecimal!
+  totalSharesReceived: BigDecimal!
+  "Net deposits of a given Account within a given Vault. Transfers between accounts are taken into consideration for this metric"
+  netDepositsRaw: BigInt!
+  "Total tokens deposited by this Account in Vault"
+  totalDepositedRaw: BigInt!
+  "Total tokens withdrawn by this Account in Vault"
+  totalWithdrawnRaw: BigInt!
+  "Total tokens sent to another account by this Account in Vault"
+  totalSentRaw: BigInt!
+  "Total tokens received from another account by this Account in Vault"
+  totalReceivedRaw: BigInt!
+  "Shares are the token minted by the Vault"
+  shareBalanceRaw: BigInt!
+  totalSharesMintedRaw: BigInt!
+  totalSharesBurnedRaw: BigInt!
+  totalSharesSentRaw: BigInt!
+  totalSharesReceivedRaw: BigInt!
 }
 
-# Ported from - yVault@Token
 type Token @entity {
   id: ID!
   address: Bytes!
   decimals: Int!
   name: String!
   symbol: String!
-  "Additional Data needed for BadgerDao"
-  totalSupply: BigInt
+}
+
+type Transfer @entity {
+  id: ID!
+  from: Account!
+  to: Account!
+  value: BigInt!
+  amount: BigInt!
+  vault: Vault!
+  pricePerFullShare: BigInt!
+  vaultBalance: BigInt!
+  totalSupply: BigInt!
+  available: BigInt!
+  transaction: Transaction!
+}
+
+interface Action @entity {
+  id: ID!
+  vault: Vault!
+  account: Account!
+  amount: BigInt!
+  shares: BigInt!
+  pricePerFullShare: BigInt!
+  vaultBalance: BigInt!
+  totalSupply: BigInt!
+  available: BigInt!
+  transaction: Transaction!
+}
+
+type Deposit implements Action @entity {
+  id: ID!
+  vault: Vault!
+  account: Account!
+  amount: BigInt!
+  shares: BigInt!
+  pricePerFullShare: BigInt!
+  vaultBalance: BigInt!
+  totalSupply: BigInt!
+  available: BigInt!
+  transaction: Transaction!
+}
+
+type Withdrawal implements Action @entity {
+  id: ID!
+  vault: Vault!
+  account: Account!
+  amount: BigInt!
+  shares: BigInt!
+  pricePerFullShare: BigInt!
+  vaultBalance: BigInt!
+  totalSupply: BigInt!
+  available: BigInt!
+  transaction: Transaction!
+}
+
+type Harvest @entity {
+  id: ID!
+  vault: Vault!
+  strategy: Strategy!
+  pricePerFullShareBefore: BigDecimal!
+  pricePerFullShareAfter: BigDecimal!
+  vaultBalanceBefore: BigDecimal!
+  vaultBalanceAfter: BigDecimal!
+  strategyBalanceBefore: BigDecimal!
+  strategyBalanceAfter: BigDecimal!
+  earnings: BigDecimal!
+  pricePerFullShareBeforeRaw: BigInt!
+  pricePerFullShareAfterRaw: BigInt!
+  vaultBalanceBeforeRaw: BigInt!
+  vaultBalanceAfterRaw: BigInt!
+  strategyBalanceBeforeRaw: BigInt!
+  strategyBalanceAfterRaw: BigInt!
+  earningsRaw: BigInt!
+  transaction: Transaction!
+}
+
+type Strategy @entity {
+  "Ethereum address"
+  id: ID!
+  vault: Vault!
+  totalEarnings: BigDecimal!
+  totalEarningsRaw: BigInt!
+  harvests: [Harvest!]! @derivedFrom(field: "strategy")
+  activeOnVaults: [Vault!] @derivedFrom(field: "currentStrategy")
+}
+
+type Controller @entity {
+  "Ethereum address"
+  id: ID!
+  vault: Vault!
+  activeOnVaults: [Vault!] @derivedFrom(field: "currentController")
+}
+
+type Transaction @entity {
+  "ID = Transaction Hash"
+  id: ID!
+  timestamp: BigInt!
+  blockNumber: BigInt!
+  # duplicated field to allow for byte search with transactionHash_contains
+  transactionHash: Bytes!
+  deposits: [Deposit!]! @derivedFrom(field: "transaction")
+  withdrawals: [Withdrawal!]! @derivedFrom(field: "transaction")
+  transfers: [Transfer!]! @derivedFrom(field: "transaction")
+  harvests: [Harvest!]! @derivedFrom(field: "transaction")
+  # TODO: rename
+  "List of Vaults that last updated on this transaction"
+  vaultsUpdated: [Vault!]! @derivedFrom(field: "transaction")
+}
+
+type Geyser @entity {
+  id: ID!
+  totalStaked: BigInt!
+  stakeEvents: [StakedEvent!]! @derivedFrom(field: "geyser")
+  unstakeEvents: [UnstakedEvent!]! @derivedFrom(field: "geyser")
+}
+
+# # Each user has account data for one geyser
+# type GeyserAccountData @entity {
+#   id: ID!
+#   geyser: Geyser!
+#   stakes: [GeyserStake!]! @derivedFrom(field: "account")
+#   lastUpdate: BigInt!
+#   cumulativeShareSeconds: BigInt!
+# }
+
+# type GeyserStake @entity {
+#   id: ID!
+#   geyser: Geyser!
+#   account: Account!
+#   amount: BigInt!
+#   stakedAt: BigInt!
+# }
+
+type StakedEvent @entity {
+  id: ID!
+  geyser: Geyser!
+  user: Bytes!
+  amount: BigInt!
+  total: BigInt!
+  timestamp: BigInt!
+  blockNumber: BigInt!
+  data: Bytes!
+}
+
+type UnstakedEvent @entity {
+  id: ID!
+  geyser: Geyser!
+  user: Bytes!
+  amount: BigInt!
+  total: BigInt!
+  timestamp: BigInt!
+  blockNumber: BigInt!
+  data: Bytes!
+}
+
+type HarvestEvent @entity {
+  id: ID!
+  sourceAddress: String!
+  sourceId: String!
+}
+
+type FarmHarvestEvent @entity {
+  id: ID!
+  totalFarmHarvested: BigInt!
+  farmToRewards: BigInt!
+  governancePerformanceFee: BigInt!
+  strategistPerformanceFee: BigInt!
+  timestamp: BigInt!
+  blockNumber: BigInt!
+}
+
+type SushiHarvestEvent @entity {
+  id: ID!
+  xSushiHarvested: BigInt!
+  totalxSushi: BigInt!
+  toStrategist: BigInt!
+  toGovernance: BigInt!
+  toBadgerTree: BigInt!
+  timestamp: BigInt!
+  blockNumber: BigInt!
+}
+
+type TokenBalance @entity {
+  id: ID!
+  balance: BigInt!
+  token: Token!
 }

@@ -1,34 +1,21 @@
-import { Address, Value, BigDecimal, BigInt } from '@graphprotocol/graph-ts';
+import { Address } from '@graphprotocol/graph-ts';
 
 import { Transfer } from '../../generated/Badger/MiniMeToken';
-import { SgTransfer } from '../../generated/schema'
-import { getCurrentNetwork } from '../utils/network'
-import { getOrCreateUser } from '../utils/sett-util';
-
+import { getOrCreateTokenBalance } from '../utils/helpers/token/balance';
 export function handleBadgerTransfer(event: Transfer): void {
-  // Record the Transfer
-  let sgTransfer = new SgTransfer(event.transaction.hash.toHexString());
-  sgTransfer.network = getCurrentNetwork();
-  sgTransfer.from = event.transaction.from.toHexString();
-  sgTransfer.to = event.transaction.to.toHexString();
-  sgTransfer.sett = "0x3472a5a71965499acd81997a54bba8d852c6e53d"
-  sgTransfer.amount = event.transaction.value;
-  sgTransfer.save();
+  let badgerToken = Address.fromString('0x3472a5a71965499acd81997a54bba8d852c6e53d');
+  let fromId = event.params._from
+    .toHexString()
+    .concat('-')
+    .concat(badgerToken.toHexString());
+  let toId = event.params._to.toHexString().concat('-').concat(badgerToken.toHexString());
 
-  // Update User Transactions
-  if (event.transaction.from != null)
-  {
-    let sgAccountFrom = getOrCreateUser(event.transaction.from as Address);
-    sgAccountFrom.transfers.push(sgTransfer.id);
-    sgAccountFrom.save();
-  }
+  let fromAccount = getOrCreateTokenBalance(fromId, badgerToken);
+  let toAccount = getOrCreateTokenBalance(toId, badgerToken);
 
-  if (event.transaction.to != null)
-  {
-    let sgAccountTo = getOrCreateUser(event.transaction.to as Address);
-    sgAccountTo.transfers.push(sgTransfer.id);
-    sgAccountTo.save();
-  }
+  fromAccount.balance = fromAccount.balance.minus(event.params._amount);
+  toAccount.balance = toAccount.balance.plus(event.params._amount);
+
+  fromAccount.save();
+  toAccount.save();
 }
-
-
